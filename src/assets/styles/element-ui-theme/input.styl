@@ -1,0 +1,406 @@
+/*
+  input输入框样式
+*/
+
+/**
+ 基本样式
+ */
+.my-input
+  width 100%
+  height 100%
+  max-height 100%
+  line-height 100%
+  padding 0 10px
+  outline 0
+  box-sizing border-box
+
+/**
+  圆角搜索框
+ */
+.my-input-radius
+  border-radius 4px
+
+/**
+  最小样式
+ */
+.my-input-mini
+  padding 0 15px
+  height 26px
+  line-height 26px
+  max-height 26px
+  border none
+
+/**
+  小的样式
+ */
+.my-input-small
+  height 32px
+  max-height 32px
+  line-height 32px
+
+/**
+  中等样式
+ */
+.my-input-medium
+  height 36px
+  max-height 36px
+  line-height 36px
+
+/**
+  最大样式
+ */
+.my-input-max
+  height 40px
+  max-height 40px
+  line-height 40px
+
+/**
+  鼠标放上去效果
+ */
+.my-input:hover
+  border 1px solid var(--skin)
+
+/**
+  没有边框的输入框
+ */
+.my-input-no-border
+  border none
+
+/*
+  搜索输入框
+*/
+.my-input-search
+  width 100%
+  max-width 100%
+  box-sizing border-box
+  padding 0 10px
+
+  > input
+    height 100%
+    max-height 100%
+    line-height 100%
+    width 100%
+    outline 0
+    box-sizing border-box
+
+/*
+  最小搜索输入框
+*/
+.my-input-search-mini
+  height 28px
+  line-height 28px
+  max-height 28px
+
+  > input
+    font-size 12px
+
+  > input:hover
+    border none
+
+/*
+  小搜索输入框
+*/
+.my-input-search-small
+  height 32px
+  line-height 32px
+  max-height 32px
+
+  > input
+    font-size 14px
+
+  > input:hover
+    border none
+
+/*
+  中等搜索输入框
+*/
+.my-input-search-medium
+  height 36px
+  line-height 36px
+  max-height 36px
+
+  > input
+    font-size 16px
+
+  > input:hover
+    border none
+
+/*
+  大的搜索输入框
+*/
+.my-input-search-max
+  height 40px
+  line-height 40px
+  max-height 40px
+
+  > input
+    font-size 18px
+
+  > input:hover
+    border none
+
+/**
+  时间控件样式
+ */
+.my-date-search
+  width auto !important
+  min-width 150px
+  height 28px
+  line-height 28px
+  max-height 28px
+  background-color white
+  border 1px solid #DCDFE6
+  box-sizing border-box
+  padding 0 10px
+
+  &:hover
+    border-color var(--skin)
+
+  .date-content
+    font-size 12px
+
+    &:hover
+      cursor pointer
+
+/**
+  最小的
+ */
+.my-date-search-mini
+  height 28px !important
+  line-height 28px !important
+  max-height 28px !important
+
+  .date-content
+    font-size 12px !important
+
+/**
+  小的
+ */
+.my-date-search-small
+  height 32px !important
+  line-height 32px !important
+  max-height 32px !important
+
+  .date-content
+    font-size 14px !important
+
+ /*
+  中等的
+  */
+.my-date-search-medium
+  height 36px !important
+  line-height 36px !important
+  max-height 36px !important
+
+  .date-content
+    font-size 16px !important
+
+/**
+ 最大的
+ */
+.my-date-search-max
+  height 40px !important
+  line-height 40px !important
+  max-height 40px !important
+
+  .date-content
+    font-size 18px !important
+
+/**      基于element-ui       **/
+
+/* input输入默认宽度 */
+.my-el-input
+  .el-input__inner:hover
+    border-color var(--skin)
+
+  .el-input__inner:focus
+    border-color var(--skin)
+
+  .el-textarea__inner:hover
+    border-color var(--skin)
+
+  .el-textarea__inner:focus
+    border-color var(--skin)
+
+
+.my-el-input.el-input--suffix .el-input__inner{
+  padding: 0 30px;
+}
+/* input输入自动宽度 */
+.my-el-input-auto
+  .el-input
+    width auto
+
+/* form表单，默认宽度 */
+.my-el-form
+  .el-form-item
+    margin-bottom 10px
+
+    .el-form-item__content
+      .el-input__inner:hover
+        border-color var(--skin)
+
+      .el-input__inner:focus
+        border-color var(--skin)
+
+      .el-textarea__inner:hover
+        border-color var(--skin)
+
+      .el-textarea__inner:focus
+        border-color var(--skin)
+
+      .el-input-number
+        .el-input-number__decrease ~ .el-input
+          .el-input__inner
+            border-color var(--skin)
+
+        .el-input-number__increase ~ .el-input
+          .el-input__inner
+            border-color var(--skin)
+
+
+  .el-form-item.is-error
+    margin-bottom 20px
+
+  .el-form-item.is-success
+    .el-form-item__content
+      .el-input__inner
+        border-color var(--skin)
+
+      .el-textarea__inner
+        border-color var(--skin)
+
+/* form表单宽度自动 */
+.my-el-form-auto
+  .el-form-item
+    .el-form-item__content
+      .el-input
+        width auto
+
+      .el-textarea
+        width auto
+
+/* checkbox按钮 */
+.my-el-checkbox
+  .el-checkbox__input.is-focus
+    .el-checkbox__inner
+      border-color var(--skin)
+
+  &:hover
+    .el-checkbox__inner
+      border-color var(--skin)
+
+  &.is-checked, .el-checkbox__input.is-indeterminate
+    .el-checkbox__inner
+      background-color var(--skin)
+      border-color var(--skin)
+
+    .el-checkbox__label
+      color var(--skin)
+
+
+/* 标记按钮 */
+.my-el-mark
+  display flex
+  justify-content space-between
+  align-content space-between
+  flex-wrap wrap
+
+  .el-checkbox-button
+    margin-top 5px
+
+    .el-checkbox-button__original
+      display none
+
+    .el-checkbox-button__inner
+      font-size 7px
+      border-radius 15px
+      border 1px solid #DCDFE6
+      box-shadow none
+
+    &.is-checked
+      .el-checkbox-button__inner
+        color white
+        background-color var(--skin)
+        border-color var(--skin)
+
+    &.is-focus
+      .el-checkbox-button__inner
+        border-color #DCDFE6
+
+    &:hover
+      .el-checkbox-button__inner
+        color white
+        background-color var(--skin)
+        border-color var(--skin)
+
+/*
+  时间日期选择器样式
+*/
+.my-el-date-picker
+  .el-picker-panel__body-wrapper
+    .el-picker-panel__body
+      .el-date-picker__time-header
+        .el-input__inner:hover
+          color var(--skin)
+          border-color var(--skin)
+
+        .el-input__inner:focus
+          color var(--skin)
+          border-color var(--skin)
+
+        .el-date-picker__editor-wrap
+          .el-time-panel
+            .el-time-panel__footer
+              .el-time-panel__btn.confirm
+                color var(--skin)
+
+      .el-date-picker__header
+        .el-picker-panel__icon-btn:hover
+          color var(--skin)
+
+        .el-date-picker__header-label:hover
+          color var(--skin)
+
+      .el-picker-panel__content
+        .el-date-table
+          .available:hover
+            color var(--skin)
+
+          .available.today
+            span
+              color var(--skin)
+
+          .available.current
+            span
+              background-color var(--skin)
+
+        .el-month-table
+          .current
+            .cell
+              color var(--skin)
+
+          .cell:hover
+            color var(--skin)
+
+        .el-year-table
+          .current
+            .cell
+              color var(--skin)
+
+          .cell:hover
+            color var(--skin)
+
+  .el-picker-panel__footer
+    .el-button--text
+      color var(--skin)
+
+    .el-button--default
+      color white
+      border-color var(--skin)
+      background-color var(--skin)
+
+      &:hover
+        color var(--skin)
+        border-color var(--skin)
+        background-color white

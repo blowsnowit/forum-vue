@@ -1,0 +1,22 @@
+.my-radio{
+  .el-radio__input.is-checked .el-radio__inner{
+    border-color: var(--skin);
+    background: var(--skin);
+  }
+  .el-radio__input.is-checked+.el-radio__label{
+    color: var(--skin);
+  }
+}
+
+.my-radio-group{
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner{
+    color: #FFF;
+    background-color: var(--skin);
+    border-color: var(--skin);
+    -webkit-box-shadow: -1px 0 0 0 var(--skin);
+    box-shadow: -1px 0 0 0 var(--skin);
+  }
+  .el-radio-button__inner:hover{
+    color: var(--skin);
+  }
+}

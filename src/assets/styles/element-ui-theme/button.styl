@@ -1,0 +1,174 @@
+/*
+  按钮组件
+*/
+
+/* 按钮基本样式 */
+.my-button
+  font-weight normal
+  border 1px solid var(--skin)
+
+/* 基本按钮的禁用效果 */
+.my-button:disabled
+  cursor not-allowed !important
+
+/* 基本按钮的禁用点击效果 */
+.my-button:disabled:active
+  background-color white !important
+  color #C0C4CC !important
+  border 1px solid #EBEEF5 !important
+  font-weight normal
+  -moz-box-shadow none
+  -webkit-box-shadow none
+  box-shadow none
+
+/* 圆角按钮 */
+.my-button-radius
+  border-radius 5px
+
+/* 按钮背景白色，字体主题色（普通按钮）*/
+.my-button-style
+  background-color white
+  color var(--skin)
+
+/* 按钮背景为主题色，字体白色（背景按钮） */
+.my-button-style-skin
+  background-color var(--skin)
+  color white
+  border 1px solid var(--skin)
+
+/* 普通按钮鼠标放上去的效果 */
+.my-button-style:hover
+  background-color var(--skin)
+  color white
+  border 1px solid var(--skin)
+
+/* 普通按钮点击效果 */
+.my-button-style:active
+  background-color var(--skin) !important
+  color white !important
+  font-weight bolder
+  border 1px solid var(--skin) !important
+  -moz-box-shadow 0 0 10px var(--skin)
+  -webkit-box-shadow 0 0 10px var(--skin)
+  box-shadow 0 0 10px var(--skin)
+
+/* 普通按钮焦点效果 */
+.my-button-style:focus
+  background-color white
+  color var(--skin)
+  border 1px solid var(--skin)
+
+/* 普通按钮禁用状态效果 */
+.my-button-style:disabled
+  cursor not-allowed !important
+
+/* 普通按钮禁用后的点击效果 */
+.my-button-style:disabled:active
+  background-color white !important
+  color #C0C4CC !important
+  border 1px solid #EBEEF5 !important
+  font-weight normal
+  -moz-box-shadow none
+  -webkit-box-shadow none
+  box-shadow none
+
+/* 普通按钮焦点鼠标效果 */
+.my-button-style:focus:hover
+  background-color var(--skin)
+  color white
+  border 1px solid var(--skin)
+
+/* 背景按钮鼠标放上去的效果 */
+.my-button-style-skin:hover
+  background-color white
+  color var(--skin)
+  border 1px solid var(--skin)
+
+/* 背景按钮点击效果 */
+.my-button-style-skin:active
+  background-color white !important
+  border 1px solid var(--skin) !important
+  color var(--skin) !important
+  font-weight bold
+  -moz-box-shadow 0 0 10px var(--skin)
+  -webkit-box-shadow 0 0 10px var(--skin)
+  box-shadow 0 0 10px var(--skin)
+
+/* 背景按钮焦点效果 */
+.my-button-style-skin:focus
+  background-color var(--skin)
+  border 1px solid var(--skin)
+  color white
+
+/* 背景按钮禁用效果 */
+.my-button-style-skin:disabled
+  cursor not-allowed !important
+
+/* 背景按钮禁用点击效果 */
+.my-button-style-skin:disabled:active
+  background-color white !important
+  color #C0C4CC !important
+  border 1px solid #EBEEF5 !important
+  font-weight normal
+  -moz-box-shadow none
+  -webkit-box-shadow none
+  box-shadow none
+
+/* 背景按钮焦点鼠标效果 */
+.my-button-style-skin:focus:hover
+  background-color white
+  color var(--skin)
+  border 1px solid var(--skin)
+
+/* 删除按钮红色边框白色背景字体红色 */
+.my-button-del{
+  border:1px solid #f56c6c;
+  background-color: #fff;
+  color:#f56c6c;
+}
+/* 删除按钮hover背景红色，字体白色 */
+.my-button-del:hover{
+  border:1px solid #f56c6c;
+  background-color: #f56c6c;
+  color:#fff !important;
+}
+/* 删除按钮focus背景红色，字体白色 */
+.my-button-del:focus{
+  border:1px solid #f56c6c;
+  background-color: #f56c6c;
+  color:#fff !important;
+}
+
+/* 编辑按钮主题色边框白色背景字体主题色 */
+.my-button-edit{
+  border:1px solid var(--skin);
+  background-color: #fff;
+  color:var(--skin);
+}
+.my-button-edit:hover{
+  border:1px solid var(--skin);
+  background-color: var(--skin);
+  color:#fff !important;
+}
+.my-button-edit:focus{
+  border:1px solid var(--skin);
+  background-color: var(--skin);
+  color:#fff;
+}
+/* 编辑按钮主题色边框主题色背景字体白色 与上面的样式反转*/
+.my-button-edit-reverse{
+  border:1px solid var(--skin);
+  background-color: var(--skin);
+  color: #fff;
+}
+.my-button-edit-reverse:hover{
+  border:1px solid var(--skin);
+  background-color: #fff;
+  color:var(--skin) !important;
+}
+.my-button-edit-reverse:focus{
+  border:1px solid var(--skin);
+  background-color: #fff;
+  color:var(--skin) !important;
+}
+

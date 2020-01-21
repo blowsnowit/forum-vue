@@ -1,0 +1,83 @@
+/*
+  选择框样式
+*/
+
+.my-select
+  height 100%
+  width 100%
+  background-color white
+  border 1px solid #DCDFE6
+  padding 0 5px
+  outline 0
+  color #606266
+
+.my-select-mini
+  height 28px
+  max-height 28px
+  line-height 28px
+  font-size 5px
+
+.my-select:hover
+  color var(--skin)
+  border 1px solid var(--skin)
+
+.my-select-option
+  color #606266
+  height 100px
+
+.my-select-option:hover
+  color var(--skin)
+
+/**
+ element-ui 适用于本项目修改
+ */
+.my-el-select
+  .el-input.el-input--suffix.is-focus
+    .el-input__inner
+      border-color var(--skin)
+      color var(--skin)
+
+    .el-select__caret
+      color var(--skin)
+
+  .el-input.el-input--suffix:hover
+    .el-input__inner
+      border-color var(--skin)
+      color var(--skin)
+
+    .el-select__caret
+      color var(--skin)
+
+  .el-input__inner:focus
+    border-color #C0C4CC
+
+/**
+  下拉列表样式
+ */
+.my-el-select-option.selected
+  color var(--skin)
+
+/**
+  下拉按钮列表
+ */
+.my-select-button-popper
+  min-width 120px
+  max-height 370px
+  overflow-y auto
+
+  > ol
+    padding 0
+    margin 10px 0
+
+    > li
+      list-style none
+      text-align center
+      max-height 35px
+      line-height 35px
+      cursor pointer
+
+      &:hover
+        color var(--skin)
+        background-color #E6E6E6
+
+

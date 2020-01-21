@@ -1,0 +1,180 @@
+/*
+  表格基础控件样式, 基于element-ui
+*/
+
+/* 表头单元格背景样式 */
+.table-header-cell-bg
+  border none !important
+  border-bottom 1px solid #D9D9D9 !important
+  color #282828
+  font-weight bold
+
+/* 表头单元格背景样式（皮肤色） */
+.table-header-cell-bg-skin
+  border none !important
+  background-color var(--skin) !important
+  border-bottom 1px solid #D9D9D9 !important
+  color white
+  font-weight bold
+
+/*改变复选框的边框色，作用于全局*/
+.el-checkbox__inner{
+  border:1px solid #000
+}
+.el-checkbox__inner:hover {
+  border-color: var(--skin);
+}
+.el-checkbox__input.is-focus .el-checkbox__inner {
+  border-color: var(--skin);
+}
+.el-checkbox__input.is-checked .el-checkbox__inner{
+  background-color: var(--skin);
+}
+.el-checkbox__input.is-checked .el-checkbox__inner{
+  border-color: var(--skin);
+}
+.el-checkbox__input.is-indeterminate .el-checkbox__inner{
+  background-color: var(--skin);
+  border-color: var(--skin);
+}
+
+
+/**
+  表格选择框样式
+ */
+.my-el-table-selection
+  .el-checkbox__input.is-checked
+    .el-checkbox__inner
+      background-color var(--skin)
+      border-color var(--skin)
+
+  .el-checkbox__input.is-focus
+    .el-checkbox__inner
+      border-color #DCDFE6
+
+  .el-checkbox__input.is-indeterminate
+    .el-checkbox__inner
+      background-color var(--skin)
+      border-color var(--skin)
+
+  .el-checkbox__input
+    .el-checkbox__inner:hover
+      border-color var(--skin)
+
+/**
+  表格可展开内部
+ */
+.my-el-table-expanded
+  .el-table__body
+    .el-table__row.expanded
+    .el-table__expanded-cell
+      padding 20px 50px
+
+/**
+  表头选择框样式
+ */
+.my-el-table-label-selection
+  .el-checkbox__input.is-checked
+    .el-checkbox__inner
+      background-color var(--skin)
+      border-color var(--skin)
+
+  .el-checkbox__input.is-focus
+    .el-checkbox__inner
+      border-color #DCDFE6
+
+  .el-checkbox__input.is-indeterminate
+    .el-checkbox__inner
+      background-color var(--skin)
+      border-color var(--skin)
+
+  .el-checkbox__input
+    .el-checkbox__inner:hover
+      border-color var(--skin)
+
+
+/**
+  表格单选框样式
+ */
+.my-el-table-radio
+  .el-radio__input
+    .el-radio__inner
+      background white
+      border-color #000
+
+    &:hover
+      .el-radio__inner
+        border-color var(--skin)
+
+    &.is-checked
+      .el-radio__inner
+        background var(--skin)
+        border-color var(--skin)
+
+  .el-radio__label
+    padding-left 0
+    display none
+
+/**
+  表格内部插槽图片预览（小）
+ */
+.my-table-popover-img
+  width 35px
+  height 35px
+
+/**
+  表格内部插槽图片预览（大）
+ */
+.my-table-popover-reference
+  width 350px
+  height 350px
+
+/**
+  表格内部item文字点击
+ */
+.my-table-item-click
+  color var(--skin)
+  cursor pointer
+
+/**
+  表格内过程状态
+ */
+.progress
+  cursor pointer
+
+  .progress-container
+    .progress-content
+      position relative
+      height 10px
+      width 10px
+      margin-right 10px
+
+    .progress-text
+      color red
+
+    .progress-content::after
+      content " "
+      height 10px
+      width 10px
+      border-width 3px 3px 0 0
+      border-color #E6E6E6
+      border-style solid
+      border-radius 5px
+      transform matrix(0.71, 0.71, -0.71, 0.71, 0, 0)
+      position absolute
+      cursor pointer
+
+    .progress-conduct::after
+      border-color var(--skin)
+
+    .progress-fail::after
+      border-color red
+
+/*
+  表格内部标记
+*/
+.my-el-table-mark
+  padding 0 5px
+  border-radius 2em
+  border 1px solid
+  color white
