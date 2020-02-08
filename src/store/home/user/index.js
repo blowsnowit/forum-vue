@@ -5,7 +5,10 @@ import actions from './actions'
 
 
 const state = {
-  a: 1
+  isLogin: false,
+  userInfo: {
+
+  }
 }
 
 // 向外暴露该对象(系统状态管理)

@@ -1,46 +1,12 @@
-import * as api from '@/api/home/userApi'
+import * as apis from '@/api/home/userApi'
 
-const actions = {
-  /**
-   * 获取文章列表
-   * @param store
-   * @param params
-   * @returns {*}
-   */
-  getArticlesAction: (store, params) => {
-    return api.getArticles(params);
-  },
-
-  /**
-   * 获取指定文章
-   * @param store
-   * @param params 文章id
-   * @returns {*}
-   */
-  getArticleAction: (store, params) => {
-    return api.getArticle(params);
-  },
-
-  /**
-   * 发布文章
-   * @param store
-   * @param params
-   * @returns {*}
-   */
-  addArticleAction: (store, params) => {
-    return api.addArticle(params);
-  },
-
-  /**
-   * 编辑文章
-   * @param store
-   * @param params
-   * @returns {*}
-   */
-  saveArticleAction: (store, params) => {
-    return api.saveArticle(params);
-  },
-};
+//自动注册接口actions
+const actions = {};
+for (let key of Object.keys(apis)){
+  actions[key] = (store, params) => {
+    return apis[key](params);
+  }
+}
 
 
 export default actions

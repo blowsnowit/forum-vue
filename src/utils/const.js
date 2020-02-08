@@ -5,7 +5,7 @@ export default{
   AUTHORIZATION: 'Authorization',
 
   //请求成功
-  CODE_SUCCESS: 1001,
+  CODE_SUCCESS: 200,
   //未登陆/无权限
-  CODE_NO_LOGIN: 1007,
+  CODE_NO_LOGIN: 100,
 }

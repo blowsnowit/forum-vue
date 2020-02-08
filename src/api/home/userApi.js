@@ -2,45 +2,55 @@ import request from "../../utils/axios"
 
 
 /**
- * 获取文章列表
+ * 登录
  * @param params
  * @returns {*}
  */
-export const getArticles = (params) => request.request({
-  url: '',
-  method: 'get',
-  params: params
-});
-
-/**
- * 获取指定文章
- * @param articleId 文章id
- * @returns {*}
- */
-export const getArticle = (articleId) => request.request({
-  url: '/' + articleId,
-  method: 'get'
-});
-
-/**
- * 发布文章
- * @param params
- * @returns {*}
- */
-export const addArticle = (params) => request.request({
-  url: '',
+export const login = (params) => request.request({
+  api: '/user/login',
   method: 'post',
   params: params
 });
 
 /**
- * 编辑文章
- * @param articleId 文章id
+ * 注册
  * @param params
  * @returns {*}
  */
-export const saveArticle = (articleId,params) => request.request({
-  url: '/' + articleId,
+export const register = (params) => request.request({
+  api: '/user/register',
+  method: 'post',
+  params: params
+});
+
+/**
+ * 获取用户信息
+ * @param userId
+ * @returns {*}
+ */
+export const getUserInfo = (userId) => request.request({
+  api: '/user/'+userId,
+  method: 'get'
+});
+
+/**
+ * 更新用户个人资料
+ * @param params
+ * @returns {*}
+ */
+export const updateUserInfo = (params) => request.request({
+  api: '/user',
+  method: 'put',
+  params: params
+});
+
+/**
+ * 更新用户密码
+ * @param params
+ * @returns {*}
+ */
+export const updateUserPassword = (params) => request.request({
+  api: '/user/password',
   method: 'put',
   params: params
 });

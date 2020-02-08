@@ -1,19 +1,57 @@
-import Home from '../../views/Home.vue'
 
 export default [
   {
-    path: '/',
+    path: '',
     name: 'home',
-    component: Home
+    component: () => import('@/views/home/HomeManager'),
+    children:[
+      {
+        path: '/',
+        name: 'home',
+        component: () => import('@/views/home/Home'),
+      },
+      {
+        path: '/user/',
+        name: 'user',
+        component: () => import('@/views/home/UserInfo'),
+      },
+      {
+        path: '/user/:userId',
+        name: 'user',
+        component: () => import('@/views/home/UserInfo'),
+      },
+      {
+        path: '/article/:articleId',
+        name: 'article',
+        component: () => import('@/views/home/Article'),
+      },
+      {
+        path: '/topic/:name',
+        name: 'topic',
+        component: () => import('@/views/home/Topic'),
+      },
+      {
+        path: '/topic',
+        name: 'alltopic',
+        component: () => import('@/views/home/AllTopic'),
+      },
+      {
+        path: '/writeArticle',
+        name: 'writeArticle',
+        component: () => import('@/views/home/WriteArticle'),
+        meta:{
+          auth: true
+        }
+
+      },
+      {
+        path: '/writeArticle/:articleId',
+        name: 'writeArticle',
+        component: () => import('@/views/home/WriteArticle'),
+        meta:{
+          auth: true
+        }
+      }
+    ]
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../../views/About.vue')
-    }
-  }
 ]
