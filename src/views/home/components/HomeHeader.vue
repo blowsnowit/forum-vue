@@ -155,6 +155,12 @@
        */
       onSearch(){
         this.$store.commit('Article/SET_SEARCH',this.searchWord);
+        this.$router.push({
+          path: "/",
+          query:{
+            searchWord: this.searchWord
+          }
+        })
       },
       _logout(){
         this.$store.commit("User/LOGOUT");

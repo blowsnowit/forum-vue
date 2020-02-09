@@ -52,13 +52,11 @@
         this.list();
       },
       "$route.query"(){
-        if (this.$route.query.refresh){
-          this.loadList();
-        }
+        this.loadList();
       }
     },
     mounted(){
-      this.list();
+      this.loadList();
     },
     methods: {
       onChangList(item){
@@ -74,7 +72,9 @@
       },
       list(){
         let params = this.$refs.page.getPage();
-        params.search = this.searchWord;
+        if (this.$route.query && this.$route.query.searchWord){
+          params.search = this.$route.query.searchWord;
+        }
         this.$store.dispatch('Article/getArticles',params).then(res=>{
           this.datas = res.data.records;
           this.$refs.page.setPage(res.data);
@@ -82,7 +82,9 @@
       },
       hotList(){
         let params = this.$refs.page.getPage();
-        params.search = this.searchWord;
+        if (this.$route.query && this.$route.query.searchWord){
+          params.search = this.$route.query.searchWord;
+        }
         this.$store.dispatch('Article/getHotArticles',params).then(res=>{
           this.datas = res.data.records;
           this.$refs.page.setPage(res.data);
