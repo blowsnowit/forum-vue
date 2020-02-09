@@ -135,12 +135,12 @@
         }
         if (command === "goUserInfo"){
           this.$router.push({
-            path: "/user/"
+            path: "/user/" + this.$store.getters['User/getUserInfo'].userId
           })
         }
         if (command === "goUserInfoSetting"){
           this.$router.push({
-            path: "/user/",
+            path: "/user/"  + this.$store.getters['User/getUserInfo'].userId,
             query:{
               type: "setting"
             }

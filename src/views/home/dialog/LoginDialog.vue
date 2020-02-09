@@ -6,14 +6,14 @@
       :visible.sync="dialogVisible"
       custom-class="my-el-dialog"
       width="20%">
-      <el-form ref="form" :model="form" >
-        <el-form-item>
+      <el-form ref="form" :model="form" :rules="formRules">
+        <el-form-item prop="userName">
           <el-input v-model="form.userName" placeholder="请输入用户账号"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input type="password" show-password v-model="form.password" placeholder="请输入用户密码"></el-input>
         </el-form-item>
-        <el-button style="width: 100%;" class="my-button-style-skin" @click="_login">开始登入</el-button>
+        <el-button style="width: 100%;" class="my-button-style-skin" @click="submit">开始登入</el-button>
       </el-form>
       <div slot="footer" style="text-align: center;">
         <a href="">忘记密码</a>
@@ -35,7 +35,15 @@
         form:{
           userName: null,
           password: null
-        }
+        },
+        formRules:{
+          userName: [
+            { required: true, message: '用户名不能为空', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '密码不能为空', trigger: 'blur' }
+          ]
+        },
       }
     },
     methods: {
@@ -46,12 +54,16 @@
         this.dialogVisible = false;
       },
 
-      _login(){
-        let params = this.form;
-        this.$store.dispatch("User/login",params).then(res=>{
-          this.$store.commit('User/LOGIN',res.data);
-          this._refreshPage();
-          this.close();
+      submit(){
+        this.$refs.form.validate((valid) => {
+          if (valid){
+            let params = this.form;
+            this.$store.dispatch("User/login",params).then(res=>{
+              this.$store.commit('User/LOGIN',res.data);
+              this._refreshPage();
+              this.close();
+            })
+          }
         })
       },
 

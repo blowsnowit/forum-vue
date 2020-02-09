@@ -6,17 +6,17 @@
       :visible.sync="dialogVisible"
       custom-class="my-el-dialog"
       width="20%">
-      <el-form ref="form" :model="form" >
-        <el-form-item>
+      <el-form ref="form" :model="form" :rules="formRules">
+        <el-form-item prop="userName">
           <el-input v-model="form.userName" placeholder="请输入用户账号"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input type="password" show-password v-model="form.password" placeholder="请输入用户密码"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="confirmPassword">
           <el-input type="password" show-password v-model="form.confirmPassword" placeholder="请再次输入用户密码"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="email">
           <el-input type="email" v-model="form.email" placeholder="邮箱号"></el-input>
         </el-form-item>
         <el-form-item>
@@ -24,14 +24,14 @@
             <captch slot="append" style="width: 70px;" v-model="token"></captch>
           </el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="emailCode">
           <el-input type="email" v-model="form.emailCode" placeholder="邮箱验证码">
             <el-button slot="append" @click="sendEmailCode" :disabled="codeSeconds > 0">
               {{codeSeconds > 0 ? codeSeconds : '发送'}}
             </el-button>
           </el-input>
         </el-form-item>
-        <el-button style="width: 100%;" class="my-button-style-skin" @click="_register">开始注册</el-button>
+        <el-button style="width: 100%;" class="my-button-style-skin" @click="submit">开始注册</el-button>
       </el-form>
       <div slot="footer" style="text-align: center;">
         <div class="register-tip">
@@ -58,6 +58,24 @@
           email: null,
           emailCode: null
         },
+        formRules:{
+          userName: [
+            { required: true, message: '用户名不能为空', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: '密码不能为空', trigger: 'blur' }
+          ],
+          confirmPassword: [
+            { required: true, message: '确认密码不能为空', trigger: 'blur' }
+          ],
+          email: [
+            { required: true, message: '邮箱不能为空', trigger: 'blur' },
+            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
+          ],
+          emailCode: [
+            { required: true, message: '邮箱验证码不能为空', trigger: 'blur' }
+          ],
+        },
         code: null,
         token: null,
 
@@ -72,11 +90,15 @@
         this.dialogVisible = false;
       },
 
-      _register(){
-        let params = this.form;
-        this.$store.dispatch("User/register",params).then(res=>{
-          this.$message.success("注册成功");
-          this.openLogin();
+      submit(){
+        this.$refs.form.validate((valid) => {
+          if (valid) {
+            let params = this.form;
+            this.$store.dispatch("User/register",params).then(res=>{
+              this.$message.success("注册成功");
+              this.openLogin();
+            })
+          }
         })
       },
 

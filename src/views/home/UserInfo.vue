@@ -59,6 +59,37 @@
               </el-form-item>
             </el-form>
           </el-tab-pane>
+          <el-tab-pane label="邮箱安全" name="email">
+            <el-form ref="passwordForm" :model="emailForm" :rules="emailFormRules" label-width="120px">
+              <el-row :gutter="10">
+                <el-col :md="10">
+                  <el-form-item label="原密码：" prop="oldUserPassword">
+                    <el-input type="password" show-password v-model="emailForm.oldUserPassword"></el-input>
+                  </el-form-item>
+                  <el-form-item label="邮箱号：" prop="email">
+                    <el-input type="email" v-model="emailForm.email"></el-input>
+                  </el-form-item>
+                  <template>
+                    <el-form-item label="图形验证码：">
+                      <el-input class="no-append-padding" type="email" v-model="code" >
+                        <captch slot="append" style="width: 70px;" v-model="token"></captch>
+                      </el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱验证码：" prop="emailCode">
+                      <el-input type="email" v-model="emailForm.emailCode">
+                        <el-button slot="append" @click="sendEmailCode" :disabled="codeSeconds > 0">
+                          {{codeSeconds > 0 ? codeSeconds : '发送'}}
+                        </el-button>
+                      </el-input>
+                    </el-form-item>
+                  </template>
+                </el-col>
+              </el-row>
+              <el-form-item>
+                <el-button class="my-button-style-skin" @click="updateUserEmail">修  改</el-button>
+              </el-form-item>
+            </el-form>
+          </el-tab-pane>
         </template>
       </el-tabs>
     </el-card>
@@ -70,9 +101,10 @@
   import Article from "./Article";
   import ArticleCard from "./components/ArticleCard";
   import Page from "../../components/Page";
+  import Captch from "../../components/Captch";
   export default {
     name: "UserInfo",
-    components: {Page, ArticleCard, Article, UserInfoCard},
+    components: {Captch, Page, ArticleCard, Article, UserInfoCard},
     data() {
       return {
         activeName: 'article',
@@ -108,7 +140,28 @@
           confirmNewUserPassword: [
             { required: true, message: '确认新密码不能为空', trigger: 'blur' }
           ]
-        }
+        },
+
+        emailForm:{
+          oldUserPassword: null,
+          email: null,
+          emailCode: null
+        },
+        emailFormRules: {
+          oldUserPassword: [
+            { required: true, message: '旧密码不能为空', trigger: 'blur' }
+          ],
+          email: [
+            { required: true, message: '邮箱不能为空', trigger: 'blur' },
+            { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
+          ],
+          emailCode: [
+            { required: true, message: '邮箱验证码不能为空', trigger: 'blur' }
+          ]
+        },
+        code: null,
+        token: null,
+        codeSeconds: 0
       }
     },
     computed:{
@@ -145,6 +198,8 @@
           this.settingForm.userNick = this.userInfo.userNick;
           this.settingForm.userDesc = this.userInfo.userDesc;
           this.settingForm.userFace = this.userInfo.userFace;
+
+          this.emailForm.email = this.userInfo.userEmail;
         }
         this.list();
       },
@@ -181,7 +236,44 @@
             })
           }
         });
-
+      },
+      updateUserEmail(){
+        this.$refs.emailForm.validate((valid) => {
+          if (valid) {
+            this.$store.dispatch('User/updateUserEmail',this.emailForm).then(res=>{
+              //更新用户资料
+              this.$store.commit("User/UPDATE_USERINFO",this.settingForm);
+              this.$refs.userInfoCard.getUserInfoById();
+            })
+          }
+        });
+      },
+      sendEmailCode(){
+        if (!this.emailForm.email){
+          this.$message.error('请先填写邮箱地址');
+          return;
+        }
+        if (!this.code){
+          this.$message.error('请先填写图形验证码');
+          return;
+        }
+        let params = {
+          email: this.emailForm.email,
+          code: this.code,
+          token: this.token,
+          templateName: "mail_template_find"
+        }
+        this.$store.dispatch('User/sendEmailCode',params).then(res=>{
+          this.$message.success('发送邮件验证码成功');
+          //邮箱验证码发送倒计时
+          this.codeSeconds = 60;
+          let timer = setInterval(()=>{
+            this.codeSeconds--;
+            if (this.codeSeconds === 0){
+              clearInterval(timer);
+            }
+          },1000);
+        })
       }
     },
   }

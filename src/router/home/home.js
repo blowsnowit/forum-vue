@@ -11,11 +11,6 @@ export default [
         component: () => import('@/views/home/Home'),
       },
       {
-        path: '/user/',
-        name: 'user',
-        component: () => import('@/views/home/UserInfo'),
-      },
-      {
         path: '/user/:userId',
         name: 'user',
         component: () => import('@/views/home/UserInfo'),
