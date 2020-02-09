@@ -16,7 +16,7 @@
         <el-button style="width: 100%;" class="my-button-style-skin" @click="submit">开始登入</el-button>
       </el-form>
       <div slot="footer" style="text-align: center;">
-        <a href="">忘记密码</a>
+        <a href="javascript:;" @click="openFind">忘记密码</a>
         <div class="register-tip">
           <span style="color: #000;">还没有注册？</span>
           <a href="javascript:;" @click="openRegister">注册</a>
@@ -70,6 +70,10 @@
       openRegister(){
         this.close();
         this.$parent.openRegisterDialog();
+      },
+      openFind(){
+        this.close();
+        this.$parent.openFindDialog();
       }
     },
   }

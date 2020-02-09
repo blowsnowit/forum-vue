@@ -58,6 +58,7 @@
       </li>
       <login-dialog ref="loginDialog"></login-dialog>
       <register-dialog ref="registerDialog"></register-dialog>
+      <find-dialog ref="findDialog"></find-dialog>
     </ul>
   </div>
 </template>
@@ -66,9 +67,10 @@
   import HomeMenu from "./HomeMenu";
   import LoginDialog from "../dialog/LoginDialog";
   import RegisterDialog from "../dialog/RegisterDialog";
+  import FindDialog from "../dialog/FindDialog";
   export default {
     name: "HomeHeader",
-    components: {RegisterDialog, LoginDialog, HomeMenu},
+    components: {FindDialog, RegisterDialog, LoginDialog, HomeMenu},
     data() {
       return {
         isMobile: false,
@@ -170,6 +172,12 @@
        */
       openRegisterDialog(){
         this.$refs.registerDialog.open();
+      },
+      /**
+       * 打开找回密码弹窗
+       */
+      openFindDialog(){
+        this.$refs.findDialog.open();
       }
     },
   }

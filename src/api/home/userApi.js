@@ -24,6 +24,16 @@ export const register = (params) => request.request({
 });
 
 /**
+ * 找回密码
+ * @param params
+ * @returns {*}
+ */
+export const find = (params) => request.request({
+  api: '/user/find',
+  method: 'put',
+  params: params
+});
+/**
  * 获取用户信息
  * @param userId
  * @returns {*}
