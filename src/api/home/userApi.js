@@ -56,6 +56,17 @@ export const updateUserPassword = (params) => request.request({
 });
 
 /**
+ * 更新用户邮箱
+ * @param params
+ * @returns {*}
+ */
+export const updateUserEmail = (params) => request.request({
+  api: '/user/email',
+  method: 'put',
+  params: params
+});
+
+/**
  * 获取图片验证码
  * @returns {*}
  */

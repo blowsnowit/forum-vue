@@ -60,7 +60,7 @@
             </el-form>
           </el-tab-pane>
           <el-tab-pane label="邮箱安全" name="email">
-            <el-form ref="passwordForm" :model="emailForm" :rules="emailFormRules" label-width="120px">
+            <el-form ref="emailForm" :model="emailForm" :rules="emailFormRules" label-width="120px">
               <el-row :gutter="10">
                 <el-col :md="10">
                   <el-form-item label="原密码：" prop="oldUserPassword">
@@ -261,7 +261,7 @@
           email: this.emailForm.email,
           code: this.code,
           token: this.token,
-          templateName: "mail_template_find"
+          templateName: "mail_template_edit"
         }
         this.$store.dispatch('User/sendEmailCode',params).then(res=>{
           this.$message.success('发送邮件验证码成功');
