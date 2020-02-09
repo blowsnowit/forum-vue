@@ -5,5 +5,9 @@ export default {
 
   getActive(state){
     return state.active;
+  },
+
+  getIsMobile(state){
+    return state.isMobile;
   }
 }

@@ -11,7 +11,7 @@
           direction="ltr"
           size="60%"
           :with-header="false">
-          <home-menu />
+          <home-menu @call="drawer = false"/>
         </el-drawer>
       </template>
       <template v-else>
@@ -73,7 +73,6 @@
     components: {FindDialog, RegisterDialog, LoginDialog, HomeMenu},
     data() {
       return {
-        isMobile: false,
         drawer: false,
 
         isShowSearch: false,
@@ -85,6 +84,9 @@
     computed:{
       isLogin(){
         return this.$store.getters['User/getIsLogin'];
+      },
+      isMobile(){
+        return this.$store.getters.getIsMobile;
       }
     },
     watch:{

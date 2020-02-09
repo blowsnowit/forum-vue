@@ -18,7 +18,7 @@
                 </span>
               </div>
             </div>
-            <div>
+            <div v-if="isMy">
               <el-dropdown @command="handleCommand">
                 <i class="el-icon-more"></i>
                 <el-dropdown-menu slot="dropdown" style="width: 150px;">
@@ -44,14 +44,14 @@
             <tag-item v-for="tag in article.articleTags" :key="tag" :name="tag"></tag-item>
           </div>
         </el-card>
-        <!--<el-card class="box-card">-->
-        <!--<div slot="header">-->
-        <!--<span><i class="el-icon-chat-line-round"></i> 最新回复（4）</span>-->
-        <!--</div>-->
-        <!--<div v-for="o in 4" :key="o" class="text item">-->
-        <!--{{'列表内容 ' + o }}-->
-        <!--</div>-->
-        <!--</el-card>-->
+        <el-card class="box-card">
+        <div slot="header">
+        <span><i class="el-icon-chat-line-round"></i> 最新回复（4）</span>
+        </div>
+        <div v-for="o in 4" :key="o" class="text item">
+        {{'列表内容 ' + o }}
+        </div>
+        </el-card>
       </template>
       <template slot="right">
         <el-card class="box-card menu-card">
@@ -93,7 +93,7 @@
           articleAddTime: null,
           articleUpdateTime: "",
           articleStatus: null,
-          userDTO: {userNick: "",userFace: ""},
+          userDTO: {userNick: "",userFace: "",userId: null},
           articleTags: [],
           articleTopics: []
         },
@@ -102,6 +102,14 @@
           children: 'children',
           label: 'name'
         }
+      }
+    },
+    computed:{
+      userInfo(){
+        return this.$store.getters['User/getUserInfo'];
+      },
+      isMy(){
+        return this.userInfo && this.userInfo.userId === this.article.userDTO.userId;
       }
     },
     async mounted(){

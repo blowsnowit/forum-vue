@@ -21,6 +21,7 @@
     },
     methods: {
       goPath(path) {
+        this.$emit("call");
         this.$router.push({
           path: path
         })

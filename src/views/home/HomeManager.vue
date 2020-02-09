@@ -22,21 +22,13 @@
     components: {HomeFooter, HomeMenu, HomeHeader},
     data() {
       return {
-        route: '',
-        clientWidth: 0
+        route: ''
       }
     },
     computed:{
       isMobile(){
-        return this.clientWidth < 768;
+        return this.$store.getters.getIsMobile;
       }
-    },
-    mounted(){
-      window.onresize = () => {
-        this.clientWidth = document.body.clientWidth;
-      }
-      this.clientWidth = document.body.clientWidth;
-      window.isMobile = this.isMobile;
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {

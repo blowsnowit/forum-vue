@@ -29,9 +29,14 @@
         width: 0
       }
     },
+    computed:{
+      isMobile(){
+        return this.$store.getters.getIsMobile;
+      }
+    },
     mounted(){
       this.$nextTick(()=>{
-        if (!window.isMobile) {
+        if (!this.isMobile) {
           //获取宽度
           this.width = $("#rightHomeLayoutWidthBox")[0].offsetWidth;
         }

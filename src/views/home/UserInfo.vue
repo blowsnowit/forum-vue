@@ -170,7 +170,6 @@
       },
       isMy(){
         return this.userInfo && this.userInfo.userId === this.userId;
-
       }
     },
     watch:{
