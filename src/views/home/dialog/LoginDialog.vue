@@ -19,7 +19,7 @@
         <a href="">忘记密码</a>
         <div class="register-tip">
           <span style="color: #000;">还没有注册？</span>
-          <a href="">注册</a>
+          <a href="javascript:;" @click="openRegister">注册</a>
         </div>
       </div>
     </el-dialog>
@@ -50,8 +50,14 @@
         let params = this.form;
         this.$store.dispatch("User/login",params).then(res=>{
           this.$store.commit('User/LOGIN',res.data);
+          this._refreshPage();
           this.close();
         })
+      },
+
+      openRegister(){
+        this.close();
+        this.$parent.openRegisterDialog();
       }
     },
   }

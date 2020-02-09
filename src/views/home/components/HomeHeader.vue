@@ -57,6 +57,7 @@
         </el-popover>
       </li>
       <login-dialog ref="loginDialog"></login-dialog>
+      <register-dialog ref="registerDialog"></register-dialog>
     </ul>
   </div>
 </template>
@@ -64,9 +65,10 @@
 <script type="text/ecmascript-6">
   import HomeMenu from "./HomeMenu";
   import LoginDialog from "../dialog/LoginDialog";
+  import RegisterDialog from "../dialog/RegisterDialog";
   export default {
     name: "HomeHeader",
-    components: {LoginDialog, HomeMenu},
+    components: {RegisterDialog, LoginDialog, HomeMenu},
     data() {
       return {
         isMobile: false,
@@ -124,6 +126,10 @@
         if (command === "login"){
           this.openLoginDialog();
         }
+        if (command === "register"){
+          this.openRegisterDialog();
+        }
+
         if (command === "logout"){
           this._logout();
         }
@@ -148,17 +154,23 @@
       onSearch(){
         this.$store.commit('Article/SET_SEARCH',this.searchWord);
       },
-
       _logout(){
         this.$store.commit("User/LOGOUT");
-        this.$router.push({
-          path: "/"
-        })
+        this._refreshPage();
       },
+
+      /**
+       * 打开登录弹窗
+       */
       openLoginDialog(){
         this.$refs.loginDialog.open();
       },
-
+      /**
+       * 打开注册窗口
+       */
+      openRegisterDialog(){
+        this.$refs.registerDialog.open();
+      }
     },
   }
 </script>

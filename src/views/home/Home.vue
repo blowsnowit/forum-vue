@@ -50,6 +50,11 @@
     watch:{
       searchWord(){
         this.list();
+      },
+      "$route.query"(){
+        if (this.$route.query.refresh){
+          this.loadList();
+        }
       }
     },
     mounted(){

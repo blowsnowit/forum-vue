@@ -116,7 +116,8 @@
         return this.$store.getters['User/getUserInfo'];
       },
       isMy(){
-        return this.userInfo.userId === this.userId;
+        return this.userInfo && this.userInfo.userId === this.userId;
+
       }
     },
     watch:{
@@ -140,9 +141,11 @@
     methods: {
       initUserId(){
         this.userId = parseInt(this.$route.params.userId) || this.userInfo.userId;
-        this.settingForm.userNick = this.userInfo.userNick;
-        this.settingForm.userDesc = this.userInfo.userDesc;
-        this.settingForm.userFace = this.userInfo.userFace;
+        if (this.userInfo){
+          this.settingForm.userNick = this.userInfo.userNick;
+          this.settingForm.userDesc = this.userInfo.userDesc;
+          this.settingForm.userFace = this.userInfo.userFace;
+        }
         this.list();
       },
       list(){

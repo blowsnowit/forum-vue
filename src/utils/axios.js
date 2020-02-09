@@ -49,12 +49,12 @@ axios.interceptors.response.use(function (response) {
   if (loading != null) {
     loading.close();
   }
-  if (response.data.resultCode === CODE_NO_LOGIN) {
+  if (response.data.code === CODE_NO_LOGIN) {
     Message({
       message: response.data.message,
       type: 'error'
     });
-    store.dispatch('signOut');
+    store.commit('User/LOGOUT');
     router.push({
       path: '/',
       query: {needlogin: true}

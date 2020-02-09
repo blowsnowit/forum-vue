@@ -16,7 +16,6 @@ export default {
     localStorage.removeItem("login_user_info");
     state.isLogin = false;
     state.userInfo = null;
-
   },
 
   //更新部分用户信息
