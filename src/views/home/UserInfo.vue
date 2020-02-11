@@ -77,7 +77,7 @@
                     </el-form-item>
                     <el-form-item label="邮箱验证码：" prop="emailCode">
                       <el-input type="email" v-model="emailForm.emailCode">
-                        <el-button slot="append" @click="sendEmailCode" :disabled="codeSeconds > 0">
+                        <el-button  slot="append" @click="sendEmailCode" :disabled="codeSeconds > 0">
                           {{codeSeconds > 0 ? codeSeconds : '发送'}}
                         </el-button>
                       </el-input>

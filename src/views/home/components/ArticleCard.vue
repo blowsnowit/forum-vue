@@ -14,7 +14,9 @@
           </template>
           <el-link @click="goUserPage" class="author-name my-el-link" style="vertical-align: unset;">{{article.userDTO.userNick}}</el-link>
           <span> · </span>
-          <span :title="article.articleUpdateTime">{{$utils.quickTimeago(article.articleUpdateTime)}}</span>
+          <span :title="article.articleUpdateTime">
+            {{$utils.quickTimeago(article.articleUpdateTime)}}
+          </span>
         </span>
         <span>
           <i class="el-icon-view" title="阅读量"> {{article.articleView}}</i>&nbsp;&nbsp;

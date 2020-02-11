@@ -5,6 +5,7 @@
         <el-card class="box-card article-card" :class="{'delete-status': article.articleStatus === 0 }">
           <div slot="header" class="article-card-header" >
             <el-avatar :size="50" :src="article.userDTO.userFace"></el-avatar>
+            <user-info-card :userId="article.userDTO.userId" easy></user-info-card>
             <div class="article-box">
               <div class="title">{{article.articleTitle}}</div>
               <div class="info">
@@ -80,9 +81,10 @@
   import TagItem from "../../components/TagItem";
   import Editor from "../../components/Editor";
   import HomeLayout from "./components/HomeLayout";
+  import UserInfoCard from "./components/UserInfoCard";
   export default {
     name: "Article",
-    components: {HomeLayout, Editor, TagItem, ShowNumComponent},
+    components: {UserInfoCard, HomeLayout, Editor, TagItem, ShowNumComponent},
     data() {
       return {
         articleId: null,
