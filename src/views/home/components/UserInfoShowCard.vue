@@ -13,7 +13,6 @@
     data() {
       return {
         visible: false,
-        init: true,
         animate: "out"
       }
     },

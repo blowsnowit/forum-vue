@@ -280,8 +280,6 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
 .UserInfo {
-  .user-info-box{
-    padding: 20px 0!important;
-  }
+
 }
 </style>

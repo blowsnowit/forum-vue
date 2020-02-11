@@ -7,7 +7,10 @@
       <div class="box">
         <div class="nick" @click="goUserPage">{{user.userNick}}</div>
         <div class="desc">{{user.userDesc || '用户还没有签名...'}}</div>
-        <div class="time">{{user.userAddTime}}加入</div>
+        <div class="time" >
+          <span :title="user.userAddTime">{{$utils.quickTimeago(user.userAddTime)}}加入</span>
+          <span class="user-online-status" :class="user.isOnline?'online':''"> {{user.isOnline?'在线':'离线'}}</span>
+        </div>
       </div>
     </div>
     <el-row v-if="!easy" class="total-box" style="text-align: center;">
@@ -53,15 +56,10 @@
     mounted(){
       if (this.userDTO){
         this.user = this.userDTO;
-      }else{
-        this.getUserInfoById(this.userId);
       }
     },
     methods: {
       getUserInfoById(userId) {
-        if (userId == null){
-          userId = this.$store.getters['User/getUserInfo'].userId;
-        }
         this.$store.dispatch('User/getUserInfo',userId).then(res=>{
           this.user = res.data;
         })
@@ -99,6 +97,7 @@
       flex: 1;
       margin-left: 10px;
       font-size: 18px;
+      line-height: 20px;
       .nick{
         cursor: pointer;
       }
@@ -107,6 +106,21 @@
         font-size: 10px;
         word-break: break-all;
       }
+      .user-online-status{
+        margin: 0 10px;
+      }
+      .user-online-status:before{
+        content: '';
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 50%;
+        background: var(--gray);
+      }
+      .user-online-status.online:before{
+        background: var(--skin-success);
+      }
+
     }
   }
   .total-box{
