@@ -10,7 +10,6 @@
         <span class="time">
           {{$utils.quickTimeago(comment.articleCommentTime)}}
         </span>
-        <span class="time" style="float: right;">1L</span>
       </div>
       <div class="comment">
         <editor :class="startEdit?'startEdit':''" ref="editor" :line-numbers="false" :show-tools="startEdit ? true : false" :active="startEdit? false : true" v-model="comment.articleComment"></editor>
@@ -29,18 +28,16 @@
         </div>
       </template>
       <template v-if="startReplay">
-        <article-comment-add @submit="onReplay($event,comment.articleCommentId)" @cancel="startReplay = false"></article-comment-add>
+        <article-comment-add @submit="onReplay({content: $event,commentId: comment.articleCommentId})" @cancel="startReplay = false"></article-comment-add>
       </template>
       <template v-if="comment.sonArticleComments && comment.sonArticleComments.length > 0">
         <el-divider></el-divider>
         <div class="son-article-comments" v-for="(sonComment,index) in comment.sonArticleComments" :key="sonComment.articleCommentId">
-          <article-comment @replay="onReplay" @edit="onEdit" @del="onDel" :comment="sonComment"></article-comment>
+          <article-comment :level="level + 1" @replay="onReplay" @edit="onEdit" @del="onDel" :comment="sonComment"></article-comment>
           <el-divider v-if="index < comment.sonArticleComments.length - 1"></el-divider>
         </div>
       </template>
     </div>
-
-
   </div>
 </template>
 
@@ -58,7 +55,11 @@
       }
     },
     props:{
-      comment: Object
+      comment: Object,
+      level: {
+        type: Number,
+        default: 1
+      }
     },
     computed:{
       isMy(){
@@ -77,7 +78,7 @@
       /**
        * 回复事件
        */
-      onReplay(content,commentId){
+      onReplay({content: content,commentId: commentId}){
         this.startReplay = false;
         this.$emit("replay",{
           content: content,
