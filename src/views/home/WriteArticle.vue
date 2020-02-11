@@ -8,7 +8,9 @@
             <el-input class="my-el-input my-input-no-border" v-model="article.articleTitle" placeholder="请输入文章标题"></el-input>
           </div>
           <div class="tip">文章内容：</div>
-          <editor v-model="article.articleContent" :matchTopics="matchTopics"></editor>
+          <editor v-model="article.articleContent" :matchTopics="matchTopics">
+            <li slot="tools-head">工具栏：</li>
+          </editor>
           <div class="tip">
             <!--<el-button size="mini" icon="el-icon-view" class="my-button-style left">预览</el-button>-->
             <el-button size="mini" icon="el-icon-check" class="my-button-style-skin right" @click="submit">发布</el-button>

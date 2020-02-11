@@ -23,7 +23,7 @@
         <span>
           <i class="el-icon-view" title="阅读量"> {{article.articleView}}</i>&nbsp;&nbsp;
           <!--<i class="el-icon-star-off" title="收藏量">2222</i>&nbsp;&nbsp;-->
-          <!--<i class="el-icon-chat-line-round" title="评论">2222</i>-->
+          <i class="el-icon-chat-line-round" title="评论"> {{article.articleCommentCount}}</i>
         </span>
       </div>
     </div>

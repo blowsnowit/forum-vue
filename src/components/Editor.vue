@@ -1,7 +1,7 @@
 <template>
   <div class="Editor">
     <ul v-if="showTools" class="tools" :class="active ? 'disabled': ''">
-      <li>工具栏：</li>
+      <slot name="tools-head"></slot>
       <li @click="insertContent('# ')" title="标题" >H</li>
       <li @click="insertContent('**文本**')" title="粗体" style="font-weight: bold;">B</li>
       <li @click="insertContent('*文本*')" title="斜体" style="font-style: italic;">I</li>
@@ -10,6 +10,7 @@
       <li><i class="el-icon-picture-outline" title="图片"></i></li>
       <li @click="insertContent('```\n' + '\n' + '```')" title="代码块">{}</li>
       <li @click="insertContent('#话题# ')" title="话题">#</li>
+
       <li style="right: 0;position: absolute;">
         <el-popover
           placement="bottom"
@@ -31,10 +32,10 @@
         </el-switch>
       </li>
     </ul>
-    <div class="markdown-body" v-show="active" v-html="contentRender">
+    <div v-if="active" class="markdown-body" v-html="contentRender">
     </div>
     <codemirror
-      v-show="!active"
+      v-else
       ref="editor"
       v-model="content"
       :options="cmOptions"
@@ -59,14 +60,14 @@
           value:'',
           mode: 'markdown',
           theme: "default",
-          lineNumbers: true,
+          lineNumbers: this.lineNumbers,
           lineWrapping: true,  // 长句子折行
           highlightFormatting: true,
           extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"},
-          placeholder: "请输入文章内容",
           tabSize: 2, // tab
           styleActiveLine: true, // 高亮选中行
-          matchTopics: this.matchTopics
+          matchTopics: this.matchTopics,
+          placeholder: this.placeholder
         },
         menus: [],
         menuProps:{
@@ -88,7 +89,16 @@
       matchTopics: {
         type: Function,
         default: (result)=>{}
-      }
+      },
+      placeholder:{
+        type: String,
+        default: "请输入文章内容"
+      },
+      //显示行号
+      lineNumbers: {
+        type: Boolean,
+        default: true
+      },
     },
     mounted(){
       this.content = this.value;
@@ -195,6 +205,9 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
 .Editor {
+  .markdown-body{
+    min-height: auto;
+  }
   .tools{
     position: relative;
     font-size: 15px;

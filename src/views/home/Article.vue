@@ -15,9 +15,6 @@
                     <span> · </span>
                     <span :title="article.articleUpdateTime">{{$utils.quickTimeago(article.articleUpdateTime)}}</span>
                   </span>
-                <span>
-
-                  </span>
               </div>
           </div>
           <div v-if="isMy">
@@ -47,12 +44,14 @@
           </div>
         </el-card>
         <el-card class="box-card">
-        <div slot="header">
-        <span><i class="el-icon-chat-line-round"></i> 最新回复（4）</span>
-        </div>
-        <div v-for="o in 4" :key="o" class="text item">
-        {{'列表内容 ' + o }}
-        </div>
+          <div slot="header">
+            <span><i class="el-icon-chat-line-round"></i> 最新回复</span>
+          </div>
+          <div v-for="comment in article.articleComments" :key="comment.articleCommentId">
+            <article-comment :comment="comment" @edit="onCommentEdit" @replay="onCommentReply" @del="onCommentDel"></article-comment>
+            <el-divider></el-divider>
+          </div>
+          <article-comment-add ref="articleCommentAdd" @submit="onCommentReply({content: $event,commentId: 0})"></article-comment-add>
         </el-card>
       </template>
       <template slot="right">
@@ -84,9 +83,14 @@
   import HomeLayout from "./components/HomeLayout";
   import UserInfoCard from "./components/UserInfoCard";
   import UserInfoShowCard from "./components/UserInfoShowCard";
+  import ArticleComment from "./components/ArticleComment";
+  import ArticleCommentAdd from "./components/ArticleCommentAdd";
   export default {
     name: "Article",
-    components: {UserInfoShowCard, UserInfoCard, HomeLayout, Editor, TagItem, ShowNumComponent},
+    components: {
+      ArticleCommentAdd,
+      ArticleComment,
+      UserInfoShowCard, UserInfoCard, HomeLayout, Editor, TagItem, ShowNumComponent},
     data() {
       return {
         articleId: null,
@@ -97,6 +101,7 @@
           articleAddTime: null,
           articleUpdateTime: "",
           articleStatus: null,
+          articleCommentCount: 0,
           userDTO: {userNick: "",userFace: "",userId: null},
           articleTags: [],
           articleTopics: []
@@ -187,6 +192,57 @@
       menuTreeClick(data,node){
         window.location.hash = data.id;
       },
+
+
+      /**
+       * 回复评论
+       * @param content
+       * @param commentId
+       */
+      onCommentReply({content,commentId}){
+        let params = {
+          articleId: this.article.articleId,
+          parentArticleCommentId: commentId,
+          articleComment: content
+        }
+        this.$store.dispatch("Comment/addArticleComment",params).then(res=>{
+          this.$refs.articleCommentAdd.clearContent();
+          this.$message.success("回复成功");
+          this.getArticle();
+        })
+      },
+
+      /**
+       * 编辑评论
+       * @param comment
+       */
+      onCommentEdit(comment){
+        let params = {
+          articleCommentId: comment.articleCommentId,
+          articleComment: comment.articleComment
+        }
+        this.$store.dispatch("Comment/editArticleComment",params).then(res=>{
+          this.$message.success("编辑成功");
+          this.getArticle();
+        })
+      },
+
+      /**
+       * 删除评论
+       * @param comment
+       */
+      onCommentDel(comment){
+        this.$confirm('此操作将永久删除该条评论, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$store.dispatch("Comment/delArticleComment",comment.articleCommentId).then(res=>{
+            this.$message.success("删除成功");
+            this.getArticle();
+          })
+        });
+      }
     },
   }
 </script>
