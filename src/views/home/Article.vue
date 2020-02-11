@@ -3,33 +3,34 @@
     <home-layout>
       <template slot="left">
         <el-card class="box-card article-card" :class="{'delete-status': article.articleStatus === 0 }">
-          <div slot="header" class="article-card-header" >
-            <el-avatar :size="50" :src="article.userDTO.userFace"></el-avatar>
-            <user-info-card :userId="article.userDTO.userId" easy></user-info-card>
+          <div slot="header" class="article-card-header">
+            <user-info-show-card :userDTO="article.userDTO">
+              <el-avatar :size="50" :src="article.userDTO.userFace"></el-avatar>
+            </user-info-show-card>
             <div class="article-box">
               <div class="title">{{article.articleTitle}}</div>
               <div class="info">
-                <span>
-                  <el-link class="author-name my-el-link" style="vertical-align: unset;">{{article.userDTO.userNick}}</el-link>
-                  <span> · </span>
-                  <span :title="article.articleUpdateTime">{{$utils.quickTimeago(article.articleUpdateTime)}}</span>
-                </span>
+                  <span>
+                    <el-link class="author-name my-el-link" style="vertical-align: unset;" @click="goUserPage">{{article.userDTO.userNick}}</el-link>
+                    <span> · </span>
+                    <span :title="article.articleUpdateTime">{{$utils.quickTimeago(article.articleUpdateTime)}}</span>
+                  </span>
                 <span>
 
-                </span>
+                  </span>
               </div>
-            </div>
-            <div v-if="isMy">
-              <el-dropdown @command="handleCommand">
-                <i class="el-icon-more"></i>
-                <el-dropdown-menu slot="dropdown" style="width: 150px;">
-                  <el-dropdown-item icon="el-icon-edit-outline" command="goEditArticle">编辑</el-dropdown-item>
-                  <el-dropdown-item v-if="article.articleStatus === 1" divided icon="el-icon-delete" command="delArticle">删除</el-dropdown-item>
-                  <el-dropdown-item v-else divided icon="el-icon-delete" command="restoreArticle">恢复</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-            </div>
           </div>
+          <div v-if="isMy">
+            <el-dropdown @command="handleCommand">
+              <i class="el-icon-more"></i>
+              <el-dropdown-menu slot="dropdown" style="width: 150px;">
+                <el-dropdown-item icon="el-icon-edit-outline" command="goEditArticle">编辑</el-dropdown-item>
+                <el-dropdown-item v-if="article.articleStatus === 1" divided icon="el-icon-delete" command="delArticle">删除</el-dropdown-item>
+                <el-dropdown-item v-else divided icon="el-icon-delete" command="restoreArticle">恢复</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </div>
           <div class="content">
             <editor ref="editor" :show-tools="false" :active="true" v-model="article.articleContent"></editor>
           </div>
@@ -82,9 +83,10 @@
   import Editor from "../../components/Editor";
   import HomeLayout from "./components/HomeLayout";
   import UserInfoCard from "./components/UserInfoCard";
+  import UserInfoShowCard from "./components/UserInfoShowCard";
   export default {
     name: "Article",
-    components: {UserInfoCard, HomeLayout, Editor, TagItem, ShowNumComponent},
+    components: {UserInfoShowCard, UserInfoCard, HomeLayout, Editor, TagItem, ShowNumComponent},
     data() {
       return {
         articleId: null,
@@ -161,10 +163,15 @@
         })
       },
       goEditArticle(){
-        console.log('goEditArticle');
         this.$router.push({
           path: "/writeArticle/" + this.article.articleId
         });
+      },
+      //去指定用户的用户页面
+      goUserPage() {
+        this.$router.push({
+          path: "/user/" + this.article.userDTO.userId
+        })
       },
       saveArticleStatus(status){
         this.$store.dispatch('Article/saveArticleStatus',{
@@ -189,10 +196,12 @@
   .article-card{
     margin-bottom: 20px;
     flex-direction: column;
+    position: relative;
     .article-card-header{
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+
       .article-box{
         flex: 1;
         margin: 0 10px;

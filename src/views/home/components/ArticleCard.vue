@@ -1,6 +1,8 @@
 <template>
   <div class="article-card" :class="{'delete-status': article.articleStatus === 0 }">
-    <el-avatar v-if="!noFace" style="cursor: pointer;" @click="goUserPage" :size="50" :src="article.userDTO.userFace"></el-avatar>
+    <user-info-show-card :userDTO="article.userDTO">
+      <el-avatar v-if="!noFace" style="cursor: pointer;" @click="goUserPage" :size="50" :src="article.userDTO.userFace"></el-avatar>
+    </user-info-show-card>
     <div class="article-box">
       <el-link @click="goArticlePage" class="title my-el-link">{{article.articleTitle}}</el-link>
       <div class="content" v-show="!easy">
@@ -30,9 +32,10 @@
 
 <script type="text/ecmascript-6">
   import TopicItem from "../../../components/TopicItem";
+  import UserInfoShowCard from "./UserInfoShowCard";
   export default {
     name: "ArticleCard",
-    components: {TopicItem},
+    components: {UserInfoShowCard, TopicItem},
     props:{
       easy: Boolean,
       //不显示头像
@@ -58,6 +61,8 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
 .article-card {
+  position: relative;
+
   display: flex;
 
   padding-bottom: 10px;

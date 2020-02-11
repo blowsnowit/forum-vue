@@ -1,9 +1,11 @@
 <template>
   <el-card class="user-info-card" :class="easy?'easy':''">
     <div class="user-info-box" slot="header">
-      <el-avatar :size="60" :src="user.userFace"></el-avatar>
+      <a href="javascript:;" @click="goUserPage">
+        <el-avatar :size="60" :src="user.userFace" ></el-avatar>
+      </a>
       <div class="box">
-        <div class="nick">{{user.userNick}}</div>
+        <div class="nick" @click="goUserPage">{{user.userNick}}</div>
         <div class="desc">{{user.userDesc || '用户还没有签名...'}}</div>
         <div class="time">{{user.userAddTime}}加入</div>
       </div>
@@ -40,10 +42,18 @@
     },
     props:{
       easy: Boolean,
-      userId: Number
+      userId: Number,
+      userDTO: Object
     },
     watch:{
       userId(){
+        this.getUserInfoById(this.userId);
+      }
+    },
+    mounted(){
+      if (this.userDTO){
+        this.user = this.userDTO;
+      }else{
         this.getUserInfoById(this.userId);
       }
     },
@@ -55,7 +65,13 @@
         this.$store.dispatch('User/getUserInfo',userId).then(res=>{
           this.user = res.data;
         })
-      }
+      },
+      //去指定用户的用户页面
+      goUserPage() {
+        this.$router.push({
+          path: "/user/" + this.user.userId
+        })
+      },
     },
   }
 </script>
@@ -83,6 +99,9 @@
       flex: 1;
       margin-left: 10px;
       font-size: 18px;
+      .nick{
+        cursor: pointer;
+      }
       .desc,.time{
         color: #b5b5b5;
         font-size: 10px;
