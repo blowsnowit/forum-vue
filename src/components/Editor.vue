@@ -220,7 +220,7 @@
         }
         let file = files[0];
         this.$store.dispatch("uploadImage",file).then(res=>{
-          this.insertContent("![图片名](" + res.data + ")");
+          this.insertContent("![" + file.name + "](" + res.data + ")");
         })
         console.log('fileUpload',file);
       }

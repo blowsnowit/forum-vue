@@ -46,7 +46,7 @@
         <article-comment-add noFace @submit="onReplay({content: $event,commentId: comment.articleCommentId})" @cancel="startReplay = false"></article-comment-add>
       </template>
       <template v-if="comment.sonArticleComments && comment.sonArticleComments.length > 0">
-        <el-divider></el-divider>
+        <el-divider class="mini"></el-divider>
         <div class="son-article-comments" v-for="(sonComment,index) in comment.sonArticleComments" :key="sonComment.articleCommentId">
           <article-comment easy :level="level + 1" @replay="onReplay" @edit="onEdit" @del="onDel" :comment="sonComment"></article-comment>
           <el-divider v-if="index < comment.sonArticleComments.length - 1"></el-divider>
@@ -186,6 +186,10 @@
     .CodeMirror{
       height: 100px;
     }
+  }
+
+  .el-divider.mini{
+    margin: 10px 0;
   }
 }
 .article-comment.easy{
