@@ -1,18 +1,21 @@
 <template>
   <div class="Editor">
-    <ul v-if="showTools" class="tools" :class="active ? 'disabled': ''">
-      <slot name="tools-head"></slot>
-      <li @click="insertContent('# ')" title="标题" >H</li>
-      <li @click="insertContent('**文本**')" title="粗体" style="font-weight: bold;">B</li>
-      <li @click="insertContent('*文本*')" title="斜体" style="font-style: italic;">I</li>
-      <li @click="insertContent('~~文本~~')" title="删除线" style="text-decoration: line-through;">S</li>
-      <li @click="insertContent('[文本](URL)')" title="链接">A</li>
-      <li><i class="el-icon-picture-outline" title="图片"></i></li>
-      <li @click="insertContent('```\n' + '\n' + '```')" title="代码块">{}</li>
-      <li @click="insertContent('#话题# ')" title="话题">#</li>
+    <div class="tools-bar" v-if="showTools">
+      <ul class="tools left" :class="active ? 'disabled': ''">
+        <li><slot name="tools-head"></slot></li>
+        <li @click="insertContent('# ')" title="标题" >H</li>
+        <li @click="insertContent('**文本**')" title="粗体" style="font-weight: bold;">B</li>
+        <li @click="insertContent('*文本*')" title="斜体" style="font-style: italic;">I</li>
+        <li @click="insertContent('~~文本~~')" title="删除线" style="text-decoration: line-through;">S</li>
+        <li @click="insertContent('[文本](URL)')" title="链接">A</li>
+        <li><i class="el-icon-picture-outline" title="图片"></i></li>
+        <li @click="insertContent('```\n' + '\n' + '```')" title="代码块">{}</li>
+        <li @click="insertContent('#话题# ')" title="话题">#</li>
 
-      <li style="right: 0;position: absolute;">
-        <el-popover
+      </ul>
+      <ul class="tools right hidden-xs-only" :class="active ? 'disabled': ''">
+        <li>
+          <el-popover
           placement="bottom"
           trigger="click">
           <el-tree
@@ -25,13 +28,17 @@
           </el-tree>
           <i slot="reference" @click="getMdMenu" class="el-icon-reading" style="margin-right: 10px;"></i>
         </el-popover>
-        <el-switch
-          class="my-el-switch"
-          v-model="active"
-          active-text="预览">
-        </el-switch>
-      </li>
-    </ul>
+        </li>
+        <li style="right: 0;position: absolute;">
+          <el-switch
+            class="my-el-switch"
+            v-model="active"
+            active-text="预览">
+          </el-switch>
+        </li>
+      </ul>
+    </div>
+
     <div v-if="active" class="markdown-body" v-html="contentRender">
     </div>
     <codemirror
@@ -208,21 +215,29 @@
   .markdown-body{
     min-height: auto;
   }
+  .tools-bar{
+    display: flex;
+    flex-wrap: wrap;
+  }
   .tools{
+    flex: 1;
     position: relative;
     font-size: 15px;
     margin: 0;
     padding: 10px;
-    display: flex;
-    flex-wrap: wrap;
     list-style: none;
     border-bottom: 1px solid #ebeef5;
-    padding-right: 140px;
-
+    /*padding-right: 140px;*/
+    li{
+      display: inline-block;
+    }
     li + li{
       margin: 0 10px;
       cursor: pointer;
     }
+  }
+  .tools.right{
+    text-align: right;
   }
 }
 </style>

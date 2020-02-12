@@ -1,19 +1,34 @@
 <template>
-  <div class="article-comment" :id="'comment-' + comment.articleCommentId">
-    <user-info-show-card :userDTO="comment.userDTO">
-      <el-avatar :size="50" :src="comment.userDTO.userFace"></el-avatar>
-    </user-info-show-card>
-
+  <div class="article-comment" :class="easy?'easy':''" >
+    <template v-if="!easy">
+      <user-info-show-card :userDTO="comment.userDTO">
+        <el-avatar :size="50" :src="comment.userDTO.userFace"></el-avatar>
+      </user-info-show-card>
+    </template>
     <div class="comment-box">
-      <div class="info-box">
-        <el-link class="nick my-el-link" style="vertical-align: unset;" @click="goUserPage">{{comment.userDTO.userNick}}</el-link>
-        <span class="time">
+      <template v-if="!easy">
+        <div class="info-box">
+          <el-link class="nick my-el-link" style="vertical-align: unset;" @click="goUserPage">{{comment.userDTO.userNick}}</el-link>
+          <span class="time">
           {{$utils.quickTimeago(comment.articleCommentTime)}}
         </span>
-      </div>
-      <div class="comment">
-        <editor :class="startEdit?'startEdit':''" ref="editor" :line-numbers="false" :show-tools="startEdit ? true : false" :active="startEdit? false : true" v-model="comment.articleComment"></editor>
-      </div>
+        </div>
+        <div class="comment" :id="'comment-' + comment.articleCommentId">
+          <editor :class="startEdit?'startEdit':''" ref="editor" :line-numbers="false" :show-tools="startEdit ? true : false" :active="startEdit? false : true" v-model="comment.articleComment"></editor>
+        </div>
+      </template>
+      <template v-else>
+        <div class="info-box" :id="'comment-' + comment.articleCommentId">
+          <el-link class="nick my-el-link" style="vertical-align: unset;" @click="goUserPage">{{comment.userDTO.userNick}}</el-link>
+          <template v-if="level > 2">
+            <span> 回复 </span>
+            <el-link @mouseenter="onMouseEnterReply" @mouseleave="onMouseLeaveReply" class="nick my-el-link" style="vertical-align: unset;" @click="goUserPage(parentComment)">{{parentComment.userDTO.userNick}}</el-link>
+          </template>
+          <span>：</span>
+          <editor :class="startEdit?'startEdit':''" ref="editor" :line-numbers="false" :show-tools="startEdit?true:false" :active="startEdit? false : true" v-model="comment.articleComment"></editor>
+        </div>
+      </template>
+
       <div v-if="!startEdit" class="operate" style="text-align: right;">
         <span @click="startReplay = true">回复</span>
         <template v-if="isMy">
@@ -28,12 +43,12 @@
         </div>
       </template>
       <template v-if="startReplay">
-        <article-comment-add @submit="onReplay({content: $event,commentId: comment.articleCommentId})" @cancel="startReplay = false"></article-comment-add>
+        <article-comment-add noFace @submit="onReplay({content: $event,commentId: comment.articleCommentId})" @cancel="startReplay = false"></article-comment-add>
       </template>
       <template v-if="comment.sonArticleComments && comment.sonArticleComments.length > 0">
         <el-divider></el-divider>
         <div class="son-article-comments" v-for="(sonComment,index) in comment.sonArticleComments" :key="sonComment.articleCommentId">
-          <article-comment :level="level + 1" @replay="onReplay" @edit="onEdit" @del="onDel" :comment="sonComment"></article-comment>
+          <article-comment easy :level="level + 1" @replay="onReplay" @edit="onEdit" @del="onDel" :comment="sonComment"></article-comment>
           <el-divider v-if="index < comment.sonArticleComments.length - 1"></el-divider>
         </div>
       </template>
@@ -51,11 +66,13 @@
     data() {
       return {
         startReplay: false,
-        startEdit: false
+        startEdit: false,
+        parentComment: {}
       }
     },
     props:{
       comment: Object,
+      easy: Boolean,
       level: {
         type: Number,
         default: 1
@@ -65,13 +82,21 @@
       isMy(){
         if (!this.comment || !this.$store.getters['User/getUserInfo']) return false;
         return this.comment.userDTO.userId === this.$store.getters['User/getUserInfo'].userId;
+      },
+    },
+    mounted(){
+      if (this.level > 1){
+        this.parentComment = this.$parent.comment;
       }
     },
     methods: {
       //去指定用户的用户页面
-      goUserPage() {
+      goUserPage(comment=null) {
+        if (comment == null){
+          comment = this.comment;
+        }
         this.$router.push({
-          path: "/user/" + this.comment.userDTO.userId
+          path: "/user/" + comment.userDTO.userId
         })
       },
 
@@ -97,6 +122,19 @@
        */
       onDel(comment){
         this.$emit("del",comment);
+      },
+
+
+
+      onMouseEnterReply(){
+        if (this.level > 2){
+          //TODO 抖动功能
+        }
+      },
+      onMouseLeaveReply(){
+        if (this.level > 2){
+
+        }
       }
     },
   }
@@ -145,9 +183,29 @@
 
   .Editor.startEdit{
     border: 1px solid #DCDFE6;
+    width: 100%;
     .CodeMirror{
       height: 100px;
     }
+  }
+}
+.article-comment.easy{
+  .comment-box {
+    margin-left: 0;
+    .info-box .nick {
+      font-size: 13px;
+      font-weight: unset;
+    }
+    .Editor{
+      display: inline-block;
+      .CodeMirror{
+        height: auto;
+      }
+      .markdown-body{
+        padding: 0;
+      }
+    }
+
   }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="article-comment-add">
+  <div class="article-comment-add" :class="noFace?'noFace':''">
     <template v-if="userInfo">
-      <el-avatar class="user-face" :size="50" :src="userInfo.userFace"></el-avatar>
-      <div class="comment-box">
+      <el-avatar v-if="!noFace" class="user-face" :size="50" :src="userInfo.userFace"></el-avatar>
+      <div class="comment-add-box">
         <editor ref="editor" :lineNumbers="false" placeholder="说点什么..." v-model="content"></editor>
         <div style="width: 100%;text-align: right;margin-top: 10px;">
           <el-button size="mini" class="my-button-style-skin" @click="submit">确认</el-button>
@@ -26,6 +26,9 @@
       return {
         content: null
       }
+    },
+    props:{
+      noFace: Boolean
     },
     computed:{
       userInfo(){
@@ -61,7 +64,7 @@
   .user-face{
     position: absolute;
   }
-  .comment-box{
+  .comment-add-box{
     margin-left: 60px;
   }
   .Editor{
@@ -69,6 +72,11 @@
     .CodeMirror{
       height: 100px;
     }
+  }
+}
+.article-comment-add.noFace{
+  .comment-add-box{
+    margin-left: 0;
   }
 }
 </style>
