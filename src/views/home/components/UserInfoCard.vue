@@ -60,6 +60,7 @@
     },
     methods: {
       getUserInfoById(userId) {
+
         this.$store.dispatch('User/getUserInfo',userId).then(res=>{
           this.user = res.data;
         })

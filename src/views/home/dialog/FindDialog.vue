@@ -138,7 +138,7 @@
           token: this.token,
           templateName: "mail_template_find"
         }
-        this.$store.dispatch('User/sendEmailCode',params).then(res=>{
+        this.$store.dispatch('sendEmailCode',params).then(res=>{
           this.$message.success('发送邮件验证码成功');
           //邮箱验证码发送倒计时
           this.codeSeconds = 60;

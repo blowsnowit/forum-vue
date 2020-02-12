@@ -15,7 +15,7 @@
     },
     methods: {
       generatorCaptchUrl(){
-        this.$store.dispatch('User/captch').then(res=>{
+        this.$store.dispatch('captch').then(res=>{
           this.captch = 'data:image/png;base64,' + res.data.captch;
           this.$emit('input',res.data.token);
         })

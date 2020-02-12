@@ -16,14 +16,8 @@
                     {{userInfo.userName}}
                   </el-form-item>
                   <el-form-item label="用户头像：" prop="userFace">
-                    <el-upload
-                      class="avatar-uploader"
-                      action="https://jsonplaceholder.typicode.com/posts/"
-                      :show-file-list="false"
-                      :on-success="handleAvatarSuccess"
-                      :before-upload="beforeAvatarUpload">
-                      <el-avatar :size="60" :src="settingForm.userFace"></el-avatar>
-                    </el-upload>
+                    <el-avatar :size="60" :src="settingForm.userFace"></el-avatar>
+                    <input style="opacity:0;width:100%;height:100%;position:absolute;top:0;left:0"  type="file" @change="fileUpload">
                   </el-form-item>
                   <el-form-item label="用户昵称：" prop="userNick">
                     <el-input  v-model="settingForm.userNick"></el-input>
@@ -72,7 +66,7 @@
                   <template>
                     <el-form-item label="图形验证码：">
                       <el-input class="no-append-padding" type="email" v-model="code" >
-                        <captch slot="append" style="width: 70px;" v-model="token"></captch>
+                        <captch v-if="activeName === 'email'" slot="append" style="width: 70px;" v-model="token"></captch>
                       </el-input>
                     </el-form-item>
                     <el-form-item label="邮箱验证码：" prop="emailCode">
@@ -217,7 +211,7 @@
             this.$store.dispatch('User/updateUserInfo',this.settingForm).then(res=>{
               //更新用户资料
               this.$store.commit("User/UPDATE_USERINFO",this.settingForm);
-              this.$refs.userInfoCard.getUserInfoById();
+              this.$refs.userInfoCard.getUserInfoById(this.userInfo.userId);
             })
           }
         });
@@ -262,7 +256,7 @@
           token: this.token,
           templateName: "mail_template_edit"
         }
-        this.$store.dispatch('User/sendEmailCode',params).then(res=>{
+        this.$store.dispatch('sendEmailCode',params).then(res=>{
           this.$message.success('发送邮件验证码成功');
           //邮箱验证码发送倒计时
           this.codeSeconds = 60;
@@ -273,6 +267,21 @@
             }
           },1000);
         })
+      },
+
+
+      //文件上传
+      fileUpload(e){
+        let files = e.target.files;
+        if (files.length === 0){
+          this.$message.info("请选择图片");
+          return;
+        }
+        let file = files[0];
+        this.$store.dispatch("uploadImage",file).then(res=>{
+          this.settingForm.userFace = res.data;
+        })
+        console.log('fileUpload',file);
       }
     },
   }

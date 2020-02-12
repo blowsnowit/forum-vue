@@ -8,7 +8,10 @@
         <li @click="insertContent('*文本*')" title="斜体" style="font-style: italic;">I</li>
         <li @click="insertContent('~~文本~~')" title="删除线" style="text-decoration: line-through;">S</li>
         <li @click="insertContent('[文本](URL)')" title="链接">A</li>
-        <li><i class="el-icon-picture-outline" title="图片"></i></li>
+        <li style="position: relative;">
+          <i class="el-icon-picture-outline" title="图片"></i>
+          <input style="opacity:0;width:100%;height:100%;position:absolute;top:0;left:0"  type="file" @change="fileUpload">
+        </li>
         <li @click="insertContent('```\n' + '\n' + '```')" title="代码块">{}</li>
         <li @click="insertContent('#话题# ')" title="话题">#</li>
 
@@ -205,6 +208,21 @@
           }
           return this.getLastMenuByLevel(lastMenu.children,level);
         }
+      },
+
+
+      //文件上传
+      fileUpload(e){
+        let files = e.target.files;
+        if (files.length === 0){
+          this.$message.info("请选择图片");
+          return;
+        }
+        let file = files[0];
+        this.$store.dispatch("uploadImage",file).then(res=>{
+          this.insertContent("![图片名](" + res.data + ")");
+        })
+        console.log('fileUpload',file);
       }
     },
   }
