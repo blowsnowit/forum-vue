@@ -69,6 +69,7 @@
   }
   .Editor{
     border: 1px solid #DCDFE6;
+    width: 100%;
     .CodeMirror{
       height: 100px;
     }

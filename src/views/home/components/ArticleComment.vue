@@ -180,7 +180,6 @@
       cursor: pointer;
     }
   }
-
   .Editor.startEdit{
     border: 1px solid #DCDFE6;
     width: 100%;

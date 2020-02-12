@@ -1,5 +1,5 @@
 <template>
-  <div class="Editor">
+  <div class="Editor" :class="active?'content-mode':'edit-mode'">
     <div class="tools-bar" v-if="showTools">
       <ul class="tools left" :class="active ? 'disabled': ''">
         <li><slot name="tools-head"></slot></li>
@@ -26,10 +26,10 @@
             @node-click="menuTreeClick"
             ref="tree">
           </el-tree>
-          <i slot="reference" @click="getMdMenu" class="el-icon-reading" style="margin-right: 10px;"></i>
+          <i slot="reference" @click="getMdMenu" class="el-icon-reading"></i>
         </el-popover>
         </li>
-        <li style="right: 0;position: absolute;">
+        <li>
           <el-switch
             class="my-el-switch"
             v-model="active"
