@@ -9,5 +9,9 @@ export default {
 
   getIsMobile(state){
     return state.isMobile;
+  },
+
+  getUnReadNotifyNum(state){
+    return state.unReadNotifyNum;
   }
 }

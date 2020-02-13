@@ -27,6 +27,11 @@
                   placeholder="搜索如此简单" class="my-el-input search-input" :class="{'animation':isSearchAnimation}"
                   @keyup.enter.native="onSearch"></el-input>
       </li>
+      <li v-if="isLogin">
+        <notify>
+          <i slot="reference" class="el-icon-bell"></i>
+        </notify>
+      </li>
       <li>
         <el-dropdown @command="onUserCommand">
           <i class="el-icon-user"></i>
@@ -42,19 +47,6 @@
             </template>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-popover
-          popper-class=""
-          ref="popover"
-          placement="bottom-end"
-          :visible-arrow="false"
-          trigger="hover">
-          <ul>
-            <li>我的资料</li>
-            <li>个人设置</li>
-            <li><el-divider /></li>
-            <li>登出</li>
-          </ul>
-        </el-popover>
       </li>
       <login-dialog ref="loginDialog"></login-dialog>
       <register-dialog ref="registerDialog"></register-dialog>
@@ -68,9 +60,10 @@
   import LoginDialog from "../dialog/LoginDialog";
   import RegisterDialog from "../dialog/RegisterDialog";
   import FindDialog from "../dialog/FindDialog";
+  import Notify from "./Notify";
   export default {
     name: "HomeHeader",
-    components: {FindDialog, RegisterDialog, LoginDialog, HomeMenu},
+    components: {Notify, FindDialog, RegisterDialog, LoginDialog, HomeMenu},
     data() {
       return {
         drawer: false,
@@ -215,7 +208,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    li{
+    > li{
       padding: 0 20px;
       cursor: pointer;
     }
@@ -226,7 +219,7 @@
 
   .right-box{
     height: 50px;
-    li{
+    > li{
       line-height: 50px;
     }
     .search-input{

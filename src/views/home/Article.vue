@@ -121,6 +121,11 @@
         return this.userInfo && this.userInfo.userId === this.article.userDTO.userId;
       }
     },
+    watch:{
+      "$route.query.commentId"(){
+        this.goArticleComment();
+      }
+    },
     async mounted(){
       this.articleId = this.$route.params.articleId;
       await this.addArticleView();
@@ -160,6 +165,7 @@
           this.article = res.data;
           this.$nextTick(()=>{
             this.menus = this.$refs.editor.getMdMenu();
+            this.goArticleComment();
           })
         },err=>{
           this.$router.push({
@@ -178,6 +184,15 @@
           path: "/user/" + this.article.userDTO.userId
         })
       },
+      //去指定文章评论
+      goArticleComment(){
+        if (this.$route.query.commentId){
+          let id = "comment-" + this.$route.query.commentId;
+
+          this.$utils.scrollTo(id);
+          console.log(id);
+        }
+      },
       saveArticleStatus(status){
         this.$store.dispatch('Article/saveArticleStatus',{
           articleId: this.articleId,
@@ -190,7 +205,7 @@
 
 
       menuTreeClick(data,node){
-        window.location.hash = data.id;
+        this.$utils.scrollTo(data.id);
       },
 
 

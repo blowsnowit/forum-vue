@@ -145,7 +145,8 @@
 
       },
       menuTreeClick(data,node){
-        window.location.hash = data.id;
+        this.$utils.scrollTo(data.id);
+        // window.location.hash = data.id;
       },
 
       //获取md目录

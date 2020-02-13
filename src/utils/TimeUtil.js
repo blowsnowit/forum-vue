@@ -64,5 +64,6 @@ export function getDateTimeStamp(dateStr) {
  * @returns {*|string}
  */
 export function quickTimeago(dateStr) {
+  if (!dateStr) return "";
   return timeago(getDateTimeStamp(dateStr));
 }

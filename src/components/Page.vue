@@ -4,8 +4,8 @@
       @current-change="onCurrentChange"
       style="text-align: center;"
       :current-page="page.current"
-      :page-size="page.size"
-      layout="prev, pager, next"
+      :page-size="size"
+      :layout="layout"
       :total="page.total">
     </el-pagination>
   </div>
@@ -19,9 +19,18 @@
         page: {
           current: 1,
           pages: 1,
-          size: 10,
           total: 10
         }
+      }
+    },
+    props:{
+      layout:{
+        type: String,
+        default: "prev, pager, next"
+      },
+      size:{
+        type: Number,
+        default: 10
       }
     },
     methods: {
