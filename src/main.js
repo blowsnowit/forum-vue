@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './assets/styles/index.styl'
-import './plugins/markdown.js'
-
+import './plugins/codemirror.js'
+import 'highlight.js/styles/github.css' //样式文件
 
 Vue.config.productionTip = false;
 //引入常量

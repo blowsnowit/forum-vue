@@ -5,7 +5,7 @@ import '../assets/styles/markdown.styl'
 require('codemirror/addon/fold/markdown-fold.js');
 require('codemirror/addon/edit/continuelist.js');
 require('codemirror/addon/display/placeholder.js');
-import './markdown/topicMode'
+import './codemirror/topicMode'
 
 
 import 'codemirror/mode/javascript/javascript.js'
