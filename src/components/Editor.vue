@@ -110,12 +110,7 @@
         default: true
       },
     },
-    mounted(){
-      this.content = this.value;
-      if (this.active){
-        this.renderMd();
-      }
-    },
+
     watch: {
       value(val){
         this.content = val;
@@ -131,6 +126,15 @@
           this.renderMd()
         }
       }
+    },
+    mounted(){
+      this.content = this.value;
+      if (this.active){
+        this.renderMd();
+      }
+      this.$nextTick(()=>{
+        this.refresh();
+      })
     },
     methods: {
       insertContent(content) {
@@ -224,6 +228,11 @@
           this.insertContent("![" + file.name + "](" + res.data + ")");
         })
         console.log('fileUpload',file);
+      },
+
+
+      refresh() {
+        this.$refs.editor.refresh();
       }
     },
   }

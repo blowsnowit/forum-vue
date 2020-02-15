@@ -29,7 +29,7 @@
   list-style: none;
   > li {
     padding: 10px 10px;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid var(--gray-dark);
     position: relative;
   }
   > li.skin:hover{

@@ -27,6 +27,9 @@
         </span>
       </div>
     </div>
+    <div v-if="article.articleTop > 0" class="article-top">
+      Top
+    </div>
   </div>
 </template>
 
@@ -66,7 +69,7 @@
   display: flex;
 
   padding-bottom: 10px;
-  border-bottom: 1px solid #e3e3e3;
+  border-bottom: 1px solid var(--gray-dark);
   margin-bottom: 10px;
   .article-box{
     flex: 1;
@@ -91,6 +94,13 @@
     }
   }
 
+  .article-top{
+    position: absolute;
+    right: 20px;
+    font-size: 10px;
+    color: var(--skin);
+    font-weight: bold;
+  }
 }
 .article-card.delete-status{
   text-decoration: line-through;

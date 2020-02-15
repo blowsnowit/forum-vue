@@ -109,11 +109,13 @@ export default {
         url: options.api,
         method: options.method,
       }
+      console.log(options);
       if (options.method === "get"){
         request.params = options.params;
       }else{
         request.data = options.params;
       }
+      console.log(request,options.params);
       axios.request(request).then(response=>{
         //请求成功
         if (response != null && response.status === 200) {

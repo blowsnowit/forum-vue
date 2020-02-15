@@ -2,9 +2,10 @@
   <div class="Page">
     <el-pagination
       @current-change="onCurrentChange"
+      @size-change="onSizeChange"
       style="text-align: center;"
       :current-page="page.current"
-      :page-size="size"
+      :page-size="page.size"
       :layout="layout"
       :total="page.total">
     </el-pagination>
@@ -19,7 +20,8 @@
         page: {
           current: 1,
           pages: 1,
-          total: 10
+          total: 10,
+          size: this.size
         }
       }
     },
@@ -39,13 +41,18 @@
       },
       getPage(){
         return {
-          pageSize: this.size,
+          pageSize: this.page.size,
           pageCurrent: this.page.current,
         }
       },
 
       onCurrentChange(current){
         this.page.current = current;
+        this.$emit('change');
+      },
+
+      onSizeChange(size){
+        this.page.size = size;
         this.$emit('change');
       }
     },

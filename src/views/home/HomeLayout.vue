@@ -18,7 +18,7 @@
   import HomeMenu from "./components/HomeMenu";
   import HomeFooter from "./components/HomeFooter";
   export default {
-    name: "HomeManager",
+    name: "HomeLayout",
     components: {HomeFooter, HomeMenu, HomeHeader},
     data() {
       return {
@@ -43,7 +43,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #e3e3e3;
+  background: var(--gray-dark);
   .layout{
     padding: 0 10%;
   }

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from './home'
+import Home from './home/home'
 import {requireContextDo} from "../utils/scanUtil";
 import store from '../store'
 import {Message, Loading} from 'element-ui';
@@ -12,11 +12,14 @@ const routes = []
 //批量导入路由
 let files = require.context('.', true, /.js$/);
 const modules = requireContextDo(files,['./index.js']);
+console.log(modules);
 Object.keys(modules).forEach(key => {
+  console.log(key);
   let module = modules[key];
+  console.log(module);
   routes.push(...module);
 })
-
+console.log(routes);
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
