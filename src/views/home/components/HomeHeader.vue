@@ -39,6 +39,7 @@
             <template v-if="isLogin">
               <el-dropdown-item icon="el-icon-user" command="goUserInfo">我的资料</el-dropdown-item>
               <el-dropdown-item icon="el-icon-setting" command="goUserInfoSetting">个人设置</el-dropdown-item>
+              <el-dropdown-item v-if="userInfo.userOp === 1" divided icon="el-icon-s-home" command="admin">后台</el-dropdown-item>
               <el-dropdown-item divided icon="el-icon-switch-button" command="logout">登出</el-dropdown-item>
             </template>
             <template v-else>
@@ -77,6 +78,9 @@
     computed:{
       isLogin(){
         return this.$store.getters['User/getIsLogin'];
+      },
+      userInfo(){
+        return this.$store.getters['User/getUserInfo'];
       },
       isMobile(){
         return this.$store.getters.getIsMobile;
@@ -133,6 +137,11 @@
         if (command === "goUserInfo"){
           this.$router.push({
             path: "/user/" + this.$store.getters['User/getUserInfo'].userId
+          })
+        }
+        if (command === "admin"){
+          this.$router.push({
+            path: "/admin/"
           })
         }
         if (command === "goUserInfoSetting"){

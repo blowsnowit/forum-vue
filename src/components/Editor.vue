@@ -139,7 +139,7 @@
       },
       //修改编辑方式
       renderMd(){
-        let md = require('../utils/markdownit').default;
+        let md = require('../vendor/markdown/').default;
         this.contentRender = md.render(this.content);
 
 

@@ -36,7 +36,7 @@ const md = require('markdown-it')({
   }
 });
 
-const mark = require('./markdown/markdown-it-mark.js').default;
+const mark = require('./markdown-it-mark.js').default;
 md.use(mark);
 
 
