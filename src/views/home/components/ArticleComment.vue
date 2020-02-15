@@ -49,7 +49,7 @@
         <el-divider class="mini"></el-divider>
         <div class="son-article-comments" v-for="(sonComment,index) in comment.sonArticleComments" :key="sonComment.articleCommentId">
           <article-comment easy :level="level + 1" @replay="onReplay" @edit="onEdit" @del="onDel" :comment="sonComment"></article-comment>
-          <el-divider v-if="index < comment.sonArticleComments.length - 1"></el-divider>
+          <el-divider class="mini" v-if="index < comment.sonArticleComments.length - 1"></el-divider>
         </div>
       </template>
     </div>

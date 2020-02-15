@@ -16,8 +16,8 @@
           </template>
           <el-link @click="goUserPage" class="author-name my-el-link" style="vertical-align: unset;">{{article.userDTO.userNick}}</el-link>
           <span> · </span>
-          <span :title="article.articleUpdateTime">
-            {{$utils.quickTimeago(article.articleUpdateTime)}}
+          <span :title="article.articleAddTime">
+            {{$utils.quickTimeago(article.articleAddTime)}}
           </span>
         </span>
         <span>
