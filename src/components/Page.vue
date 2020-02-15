@@ -39,7 +39,7 @@
       },
       getPage(){
         return {
-          pageSize: this.page.size,
+          pageSize: this.size,
           pageCurrent: this.page.current,
         }
       },
