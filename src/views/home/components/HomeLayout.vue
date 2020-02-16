@@ -12,7 +12,7 @@
             :modal="true"
             :visible.sync="drawer"
             direction="rtl"
-            size="50%"
+            size="60%"
             :with-header="false">
             <slot name="right">
               <home-right></home-right>
@@ -29,7 +29,7 @@
       </el-col>
     </el-row>
 
-    <home-tools @fold="drawer = true"></home-tools>
+    <home-tools :noFold="noRight" @fold="drawer = true"></home-tools>
   </div>
 </template>
 

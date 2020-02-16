@@ -36,7 +36,7 @@
         <!--</el-popover>-->
       <!--</li>-->
       <!--右侧展开-->
-      <li v-if="isMobile" @click="$emit('fold')">
+      <li v-if="isMobile && !noFold" @click="$emit('fold')">
         <i title="展开" class="el-icon-s-fold"></i>
       </li>
       <!--置顶-->
@@ -50,6 +50,9 @@
 <script type="text/ecmascript-6">
   export default {
     name: "HomeTools",
+    props:{
+      noFold: Boolean
+    },
     computed: {
       isMobile(){
         return this.$store.getters.getIsMobile;

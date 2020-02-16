@@ -9,7 +9,7 @@
           :modal="false"
           :visible.sync="drawer"
           direction="ltr"
-          size="50%"
+          size="60%"
           :with-header="false">
           <home-menu @call="drawer = false"/>
         </el-drawer>
