@@ -33,8 +33,14 @@
         </notify>
       </li>
       <li>
-        <el-dropdown @command="onUserCommand">
-          <i class="el-icon-user"></i>
+        <el-dropdown @command="onUserCommand" style="display: flex;align-items: center;height: 100%;">
+          <template v-if="isLogin">
+            <el-avatar :size="30" :src="userInfo.userFace"></el-avatar>
+          </template>
+          <template v-else>
+            <i class="el-icon-user"></i>
+          </template>
+
           <el-dropdown-menu slot="dropdown" style="width: 150px;">
             <template v-if="isLogin">
               <el-dropdown-item icon="el-icon-user" command="goUserInfo">我的资料</el-dropdown-item>
