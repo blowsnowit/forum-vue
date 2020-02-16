@@ -27,12 +27,12 @@ export default {
     window.addEventListener("resize",() => {
       let clientWidth = document.body.clientWidth;
       if (clientWidth){
-        this.$store.commit("SET_ISMOBILE",clientWidth < 768);
+        this.$store.commit("SET_ISMOBILE",clientWidth < 992);
       }
 
     });
     let clientWidth = document.body.clientWidth;
-    this.$store.commit("SET_ISMOBILE",clientWidth < 768);
+    this.$store.commit("SET_ISMOBILE",clientWidth < 992);
   },
 }
 </script>
