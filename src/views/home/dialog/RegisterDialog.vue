@@ -141,4 +141,9 @@
 .register-dialog {
 
 }
+.home-manager.mobile{
+  .register-dialog .el-dialog{
+    width: 80%!important;
+  }
+}
 </style>

@@ -161,4 +161,9 @@
     font-size: 11px;
   }
 }
+.home-manager.mobile{
+  .find-dialog .el-dialog{
+    width: 80%!important;
+  }
+}
 </style>

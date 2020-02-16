@@ -38,7 +38,7 @@
             <el-avatar :size="30" :src="userInfo.userFace"></el-avatar>
           </template>
           <template v-else>
-            <i class="el-icon-user"></i>
+            <i style="color: var(--skin-font);font-size: 16px;" class="el-icon-user"></i>
           </template>
 
           <el-dropdown-menu slot="dropdown" style="width: 150px;">

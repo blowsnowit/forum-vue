@@ -83,4 +83,9 @@
 .login-dialog {
 
 }
+.home-manager.mobile{
+  .login-dialog .el-dialog{
+    width: 80%!important;
+  }
+}
 </style>
