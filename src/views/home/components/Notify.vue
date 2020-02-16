@@ -66,6 +66,8 @@
         <page ref="page" :size="6" @change="getNotifys" style="float: left;padding: 5px;" :layout="'prev, next'"></page>
         <el-button style="float: right;margin: 10px;"
                    icon="el-icon-check" class="my-button-style-skin" size="mini" type="primary" @click="readAllNotify">全部标记为已读</el-button>
+        <el-button style="float: right;margin: 10px 0;"
+                   icon="el-icon-setting" class="my-button-style-skin" size="mini" type="primary" @click="goNotifyConfig"></el-button>
       </footer>
     </el-popover>
   </div>
@@ -141,6 +143,16 @@
       readAllNotify(){
         this.$store.dispatch("Notify/readAllNotify").then(res=>{
           this.getNotifys();
+        })
+      },
+
+
+      goNotifyConfig(){
+        this.$router.push({
+          path: "/user/"  + this.$store.getters['User/getUserInfo'].userId,
+          query:{
+            type: "notifyConfig"
+          }
         })
       }
     },

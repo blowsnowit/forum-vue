@@ -84,6 +84,21 @@
               </el-form-item>
             </el-form>
           </el-tab-pane>
+          <el-tab-pane label="通知设置" name="notifyConfig">
+            <el-form ref="notifyConfigForm" label-width="120px">
+              <el-row :gutter="10">
+                <el-col :md="10">
+                  <el-form-item v-for="(notifyConfig,index) in notifyConfigs" :key="index" :label="notifyConfig.userNotifyConfigName + '：'">
+                    <el-checkbox v-model="notifyConfig.userNotifyConfigNotify" :true-label="1" :false-label="0">站内信</el-checkbox>
+                    <el-checkbox v-model="notifyConfig.userNotifyConfigEmail" :true-label="1" :false-label="0">邮件</el-checkbox>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-form-item>
+                <el-button class="my-button-style-skin" @click="saveNotifyConfigs">修  改</el-button>
+              </el-form-item>
+            </el-form>
+          </el-tab-pane>
         </template>
       </el-tabs>
     </el-card>
@@ -155,7 +170,9 @@
         },
         code: null,
         token: null,
-        codeSeconds: 0
+        codeSeconds: 0,
+
+        notifyConfigs: []
       }
     },
     computed:{
@@ -193,6 +210,8 @@
           this.settingForm.userFace = this.userInfo.userFace;
 
           this.emailForm.email = this.userInfo.userEmail;
+
+          this.getNotifyConfigs();
         }
         this.list();
       },
@@ -269,7 +288,22 @@
         })
       },
 
-
+      /**
+       * 获取通知配置列表
+       */
+      getNotifyConfigs(){
+        this.$store.dispatch('NotifyConfig/getNotifyConfigs').then(res=>{
+          this.notifyConfigs = res.data;
+        })
+      },
+      /**
+       * 保存通知配置列表
+       */
+      saveNotifyConfigs(){
+        this.$store.dispatch('NotifyConfig/saveNotifyConfigs',this.notifyConfigs).then(res=>{
+          this.$message.success("修改成功");
+        })
+      },
       //文件上传
       fileUpload(e){
         let files = e.target.files;

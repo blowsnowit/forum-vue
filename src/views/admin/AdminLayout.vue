@@ -56,6 +56,8 @@
 <style lang="stylus" rel="stylesheet/stylus">
 .admin-layout {
   display: flex;
+  height: 100vh;
+  width: 100vw;
   .admin-layout-right{
     flex: 1;
     display: flex;
