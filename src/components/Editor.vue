@@ -132,9 +132,12 @@
       if (this.active){
         this.renderMd();
       }
-      this.$nextTick(()=>{
-        this.refresh();
-      })
+      if (!this.active){
+        this.$nextTick(()=>{
+          this.refresh();
+        })
+      }
+
     },
     methods: {
       insertContent(content) {

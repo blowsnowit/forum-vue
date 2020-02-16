@@ -67,7 +67,11 @@
       return {
         startReplay: false,
         startEdit: false,
-        parentComment: {}
+        parentComment: {
+          userDTO: {
+            userNick: null
+          }
+        }
       }
     },
     props:{
