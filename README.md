@@ -1,5 +1,6 @@
 # forum-vue
-基于 vue + vuex + element-ui 
+基于 vue + vuex + element-ui + markdown-it
+使用markdown编辑文章
 
 ## 已实现的功能
 - 发布文章
