@@ -29,5 +29,6 @@
 .tag-item {
   margin-right: 5px;
   font-size: 13px;
+  cursor: pointer;
 }
 </style>

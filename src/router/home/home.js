@@ -26,6 +26,11 @@ export default [
         component: () => import('@/views/home/Topic'),
       },
       {
+        path: '/tag/:name',
+        name: 'tag',
+        component: () => import('@/views/home/Tag'),
+      },
+      {
         path: '/topic',
         name: 'alltopic',
         component: () => import('@/views/home/AllTopic'),
