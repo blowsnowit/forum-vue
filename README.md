@@ -5,10 +5,7 @@
 
 服务端地址 https://github.com/blowsnowit/forum-server
 
-##演示图片
-![3P4A3R.png](https://s2.ax1x.com/2020/02/17/3P4A3R.png)
-![3P4dUg.png](https://s2.ax1x.com/2020/02/17/3P4dUg.png)
-![3P45G9.png](https://s2.ax1x.com/2020/02/17/3P45G9.png)
+
 
 ## 已实现的功能
 - 发布文章
@@ -27,3 +24,7 @@
 - 搜索考虑使用全文索引
 - at功能（记得通知）
 
+## 演示图片
+![3P4A3R.png](https://s2.ax1x.com/2020/02/17/3P4A3R.png)
+![3P4dUg.png](https://s2.ax1x.com/2020/02/17/3P4dUg.png)
+![3P45G9.png](https://s2.ax1x.com/2020/02/17/3P45G9.png)
