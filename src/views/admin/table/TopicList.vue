@@ -1,6 +1,22 @@
 <template>
   <div class="TopicList">
-    <admin-table-layout :columns="columns" :loadTable="loadTable">
+    <admin-table-layout expand :columns="columns" :loadTable="loadTable">
+      <template slot="expand" slot-scope="scope">
+        <el-form label-position="left" :model="scope.row" class="demo-table-expand">
+          <el-form-item label="话题名称">
+            {{scope.row.topicName}}
+          </el-form-item>
+          <el-form-item label="话题描述">
+            <el-input type="textarea" :rows="4" size="mini" v-model="scope.row.topicDesc"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button size="mini" class="my-button-style-skin" @click="saveTopicDesc(scope.row)">保存</el-button>
+            <el-button size="mini" @click="toggleRowExpansion(scope.row)">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </template>
+
+
       <template slot="topicDesc" slot-scope="scope">
         <span style="white-space: nowrap;" :title="scope.value">{{scope.value}}</span>
       </template>
@@ -27,7 +43,28 @@
     methods: {
       loadTable(params) {
         return this.$store.dispatch("AdminTopic/getTopics",params);
-      }
+      },
+
+
+      /**
+       * 保存话题描述
+       * @param row
+       */
+      saveTopicDesc(row){
+        let params = {
+          topicName: row.topicName,
+          topicDesc: row.topicDesc
+        }
+        this.$store.dispatch("AdminTopic/saveTopicDesc",params).then(res=>{
+          this.$message.success("修改成功");
+        });
+      },
+
+
+      //关闭展开框
+      toggleRowExpansion(row){
+        this.$refs.table.toggleRowExpansion(row,false);
+      },
     },
   }
 </script>

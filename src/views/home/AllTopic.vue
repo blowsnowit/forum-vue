@@ -3,7 +3,7 @@
     <home-layout :noRight="true">
       <template slot="left">
         <el-row :gutter="20">
-          <el-col v-for="item in topics" :md="6">
+          <el-col v-for="(item,index) in topics" :key="index" :md="6">
             <div class="topic-info">
               <topic-item type="" :name="item.topicName"></topic-item>
             </div>
