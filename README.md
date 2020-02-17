@@ -3,6 +3,10 @@
 
 使用markdown编辑文章
 
+服务端地址 https://github.com/blowsnowit/forum-server
+## 演示图片
+
+
 ## 已实现的功能
 - 发布文章
 - 评论功能
