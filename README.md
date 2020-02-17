@@ -1,5 +1,5 @@
 # forum-vue
-
+基于 vue + vuex + element-ui 
 
 ## 已实现的功能
 - 发布文章
