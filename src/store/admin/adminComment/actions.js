@@ -8,5 +8,4 @@ for (let key of Object.keys(apis)){
     return apis[key](params);
   }
 }
-
 export default actions

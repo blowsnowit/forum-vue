@@ -6,7 +6,14 @@
       </template>
 
       <template slot="operate" slot-scope="scope">
-        <el-button size="mini" icon="el-icon-delete" type="danger" @click="delArticleComment(scope.row.articleCommentId)"></el-button>
+        <el-switch
+          @change="changeArticleCommentStatus($event,scope)"
+          v-model="scope.row['articleCommentStatus']"
+          :active-value="1"
+          :inactive-value="0"
+          active-color="var(--skin-success)">
+        </el-switch>
+        <!--<el-button size="mini" icon="el-icon-delete" type="danger" @click="delArticleComment(scope.row.articleCommentId)"></el-button>-->
       </template>
 
     </admin-table-layout>
@@ -34,13 +41,30 @@
         return this.$store.dispatch("AdminComment/getComments",params);
       },
 
+
+      /**
+       * 修改文章评论状态
+       * @param status
+       * @param scope
+       */
+      changeArticleCommentStatus(status,scope){
+        let articleCommentId = scope.row.articleCommentId;
+
+        this.$store.dispatch("AdminComment/saveArticleCommentStatus",{
+          articleCommentId: articleCommentId,
+          articleCommentStatus: status
+        }).then(res=>{
+        },err=>{
+          scope.row['articleCommentStatus'] = !scope.row['articleCommentStatus'];
+        })
+      },
       /**
        * 删除文章评论
        * 删除后刷新当前页面数据
        * @param articleCommentId
        */
       delArticleComment(articleCommentId){
-        this.$store.dispatch("AdminComment/delArticleComment",articleCommentId).then(res=>{
+        this.$store.dispatch("AdminComment/delComment",articleCommentId).then(res=>{
           this.$message.success("删除成功");
           this.$refs.table.onLoadTable();
         })

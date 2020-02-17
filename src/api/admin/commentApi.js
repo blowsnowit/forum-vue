@@ -12,6 +12,15 @@ export const getComments = (params) => request.request({
   params: params
 });
 
+/**
+ * 修改文章评论状态
+ * @param params articleCommentId,articleCommentStatus
+ * @returns {*}
+ */
+export const saveArticleCommentStatus = (params) => request.request({
+  api: '/admin/comment/' + params.articleCommentId + "/" + params.articleCommentStatus,
+  method: 'put'
+});
 
 /**
  * 删除评论
@@ -20,6 +29,5 @@ export const getComments = (params) => request.request({
  */
 export const delComment = (articleCommentId) => request.request({
   api: '/admin/comment/' + articleCommentId,
-  method: 'delete',
-  params: params
+  method: 'delete'
 });

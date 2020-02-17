@@ -5,7 +5,6 @@ import actions from './actions'
 
 
 const state = {
-  search: null
 }
 
 // 向外暴露该对象(系统状态管理)
