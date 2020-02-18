@@ -90,12 +90,16 @@
     computed:{
       unReadNotifyNum(){
         return this.$store.getters['getUnReadNotifyNum'];
-      }
+      },
+
     },
     mounted(){
       this.getNotifys();
     },
     methods: {
+      /**
+       * 获取消息列表
+       */
       getNotifys(){
         let params = this.$refs.page.getPage();
         this.$store.dispatch('Notify/getNotifys',params).then(res=>{
@@ -134,12 +138,18 @@
         }
       },
 
+      /**
+       * 读取指定消息
+       */
       readNotify(notifyId){
         this.$store.dispatch("Notify/readNotify",notifyId).then(res=>{
           this.getNotifys();
         })
       },
 
+      /**
+       * 已读所有消息
+       */
       readAllNotify(){
         this.$store.dispatch("Notify/readAllNotify").then(res=>{
           this.getNotifys();
@@ -147,6 +157,9 @@
       },
 
 
+      /**
+       * 前往通知配置页面
+       */
       goNotifyConfig(){
         this.$router.push({
           path: "/user/"  + this.$store.getters['User/getUserInfo'].userId,

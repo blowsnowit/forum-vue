@@ -166,10 +166,7 @@
       onSearch(){
         this.$store.commit('Article/SET_SEARCH',this.searchWord);
         this.$router.push({
-          path: "/",
-          query:{
-            searchWord: this.searchWord
-          }
+          path: "/search/" + this.searchWord
         })
       },
       _logout(){

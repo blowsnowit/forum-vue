@@ -11,6 +11,11 @@ export default [
         component: () => import('@/views/home/Home'),
       },
       {
+        path: '/search/:searchWord',
+        name: 'search',
+        component: () => import('@/views/home/Search'),
+      },
+      {
         path: '/user/:userId',
         name: 'user',
         component: () => import('@/views/home/UserInfo'),
@@ -42,7 +47,6 @@ export default [
         meta:{
           auth: true
         }
-
       },
       {
         path: '/writeArticle/:articleId',

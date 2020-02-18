@@ -56,7 +56,16 @@ export const getHotArticles = (params) => request.request({
   params: params
 });
 
-
+/**
+ * 搜索文章列表
+ * @param params
+ * @returns {*}
+ */
+export const searchArticles = (params) => request.request({
+  api: 'articles/search',
+  method: 'get',
+  params: params
+});
 /**
  * 获取文章信息
  * @param articleId
