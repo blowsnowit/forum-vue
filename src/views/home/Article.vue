@@ -13,7 +13,7 @@
                   <span>
                     <el-link class="author-name my-el-link" style="vertical-align: unset;" @click="goUserPage">{{article.userDTO.userNick}}</el-link>
                     <span> · </span>
-                    <span :title="article.articleUpdateTime">{{$utils.quickTimeago(article.articleUpdateTime)}}</span>
+                    <span :title="article.articleAddTime">{{$utils.quickTimeago(article.articleAddTime)}}</span>
                   </span>
               </div>
           </div>
