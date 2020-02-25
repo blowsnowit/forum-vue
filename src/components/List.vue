@@ -1,6 +1,6 @@
 <template>
   <ul class="List">
-    <li v-for="item in datas" class="item" :class="type">
+    <li v-for="item in datas" class="item" :class="itemCls(item)" @click="selectActive = item">
       <slot :item="item"></slot>
     </li>
   </ul>
@@ -17,6 +17,26 @@
       type: {
         type: String,
         default: "skin"
+      },
+      select:{
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        selectActive: null
+      }
+    },
+    computed:{
+      itemCls(){
+        return (item)=>{
+          let cls = {
+            active: this.select && this.selectActive === item
+          };
+          cls[this.type] = true;
+          return cls;
+        }
       }
     }
   }
@@ -33,6 +53,10 @@
     position: relative;
   }
   > li.skin:hover{
+    background-color: var(--skin);
+    color: var(--skin-font);
+  }
+  > li.active{
     background-color: var(--skin);
     color: var(--skin-font);
   }

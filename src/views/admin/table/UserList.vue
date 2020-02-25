@@ -1,8 +1,19 @@
 <template>
   <div class="UserList">
-    <admin-table-layout ref="table" expand="" :columns="columns" :loadTable="loadTable">
-      <template slot="expand" slot-scope="scope">
-        <el-form label-position="left" :model="scope.row" inline class="demo-table-expand">
+    <admin-table-layout ref="table" expand="" :columns="columns" :searchConditions="searchConditions" :loadTable="loadTable">
+      <!--查询条件-->
+      <el-form label-position="left" inline @submit.native.prevent>
+        <el-form-item label="用户名/昵称">
+          <el-input size="mini" v-model="searchConditions.searchWord" placeholder="模糊查询用户名/昵称"
+                    @keyup.enter.native="toggleLoadTable"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button size="mini" class="my-button-style-skin"  @click="toggleLoadTable">查询</el-button>
+        </el-form-item>
+      </el-form>
+
+      <template slot="expand"  slot-scope="scope">
+        <el-form label-position="left"  :model="scope.row" inline class="demo-table-expand">
           <el-form-item label="用 户 名">
             <el-input size="mini" v-model="scope.row.userName"></el-input>
           </el-form-item>
@@ -83,7 +94,11 @@
           {prop: "userDesc",label: "用户签名",width: 150},
           {prop: "userStatus",label: "用户状态",width: 50}
         ],
-        userNewPassword: null
+        userNewPassword: null,
+
+        searchConditions:{
+          searchWord: null
+        }
       }
     },
     methods: {
@@ -92,7 +107,9 @@
         this.$refs.table.toggleRowExpansion(row,false);
       },
 
-
+      toggleLoadTable(){
+        this.$refs.table.onLoadTable();
+      },
 
       loadTable(params) {
         return this.$store.dispatch("AdminUser/getUsers",params);

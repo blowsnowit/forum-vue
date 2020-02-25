@@ -1,6 +1,17 @@
 <template>
   <div class="TopicList">
-    <admin-table-layout expand :columns="columns" :loadTable="loadTable">
+    <admin-table-layout ref="table" expand :columns="columns" :searchConditions="searchConditions" :loadTable="loadTable">
+      <!--查询条件-->
+      <el-form label-position="left" inline @submit.native.prevent>
+        <el-form-item label="话题名称">
+          <el-input size="mini" v-model="searchConditions.searchWord"
+                    @keyup.enter.native="toggleLoadTable"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button size="mini" class="my-button-style-skin" @click="toggleLoadTable">查询</el-button>
+        </el-form-item>
+      </el-form>
+
       <template slot="expand" slot-scope="scope">
         <el-form label-position="left" :model="scope.row" class="demo-table-expand">
           <el-form-item label="话题名称">
@@ -37,10 +48,17 @@
           {prop: "topicDesc",label: "话题描述",width: 50},
           {prop: "topicAddTime",label: "话题创建时间",width: 30},
           {prop: "articleNum",label: "文章数量",width: 10}
-        ]
+        ],
+        searchConditions:{
+          searchWord: null
+        }
       }
     },
     methods: {
+      toggleLoadTable(){
+        this.$refs.table.onLoadTable();
+      },
+
       loadTable(params) {
         return this.$store.dispatch("AdminTopic/getTopics",params);
       },

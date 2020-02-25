@@ -1,6 +1,17 @@
 <template>
   <div class="ArticleList">
-    <admin-table-layout expand="" :columns="columns" :loadTable="loadTable">
+    <admin-table-layout ref="table" expand="" :columns="columns" :searchConditions="searchConditions" :loadTable="loadTable">
+      <!--查询条件-->
+      <el-form label-position="left" inline @submit.native.prevent>
+        <el-form-item label="文章标题">
+          <el-input size="mini" v-model="searchConditions.searchWord"
+                    @keyup.enter.native="toggleLoadTable"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button size="mini" class="my-button-style-skin" @click="toggleLoadTable">查询</el-button>
+        </el-form-item>
+      </el-form>
+
       <template slot="expand" slot-scope="scope">
         <el-form label-position="left" :model="scope.row" inline class="demo-table-expand">
           <el-row :gutter="10">
@@ -37,7 +48,9 @@
       </template>
 
 
-
+      <template slot="articleTitle" slot-scope="scope">
+        <span style="white-space: nowrap;" :title="scope.value">{{scope.value}}</span>
+      </template>
       <template slot="articleContent" slot-scope="scope">
         <span style="white-space: nowrap;" :title="scope.value">{{scope.value}}</span>
       </template>
@@ -76,13 +89,20 @@
           {prop: "articleUpdateTime",label: "更新时间"},
           {prop: "articleView",label: "阅览次数"},
           {prop: "articleStatus",label: "文章操作",width: 50},
-        ]
+        ],
+        searchConditions:{
+          searchWord: null
+        }
       }
     },
     methods: {
       //关闭展开框
       toggleRowExpansion(row){
         this.$refs.table.toggleRowExpansion(row,false);
+      },
+
+      toggleLoadTable(){
+        this.$refs.table.onLoadTable();
       },
 
       loadTable(params) {

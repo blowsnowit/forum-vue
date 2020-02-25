@@ -217,7 +217,7 @@
       },
       list(){
         let params = this.$refs.page.getPage();
-        params.search = this.searchWord;
+        // params.searchWord = this.searchWord;
         params.userId = this.userId;
         this.$store.dispatch('Article/getArticles',params).then(res=>{
           this.datas = res.data.records;

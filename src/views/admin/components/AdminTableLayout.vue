@@ -1,5 +1,8 @@
 <template>
   <div class="admin-table-layout">
+    <div class="search-conditions">
+      <slot></slot>
+    </div>
     <el-table
       ref="table"
       :data="datas"
@@ -50,6 +53,10 @@
       expand:{
         type: Boolean,
         default: false
+      },
+      searchConditions:{
+        type: Object,
+        default: ()=>{}
       }
     },
     computed:{
@@ -75,6 +82,7 @@
     methods: {
       onLoadTable() {
         let params = this.$refs.page.getPage();
+        params = {...params,...this.searchConditions};
         this.loadTable(params).then(res=>{
           this.datas = res.data.records;
           this.$refs.page.setPage(res.data);
@@ -96,17 +104,23 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .admin-table-layout {
+    .search-conditions{
+      padding: 20px;
+      .el-form-item{
+        margin-bottom: 0;
+      }
+    }
     .demo-table-expand {
       font-size: 0;
-    }
-    .demo-table-expand label {
-      width: 90px;
-      color: var(--gray);
-    }
-    .demo-table-expand .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
-      width: 50%;
+      label {
+        width: 90px;
+        color: var(--gray);
+      }
+      .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+      }
     }
   }
 </style>
