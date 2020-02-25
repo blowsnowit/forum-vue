@@ -32,6 +32,7 @@ router.beforeEach((to, from, next) => {
   if (localStorage.getItem("login_user_info") && !store.getters['User/getIsLogin']){
     store.commit("User/LOGIN",JSON.parse(localStorage.getItem("login_user_info")));
   }
+  console.log(to, from);
   //检查登录状态
   if (to.meta.auth){
     //需要登录
@@ -42,6 +43,33 @@ router.beforeEach((to, from, next) => {
         query:{
           needlogin: true
         }
+      }).catch(err => {
+
+      })
+      return false;
+    }
+  }
+
+  //访问后台
+  //判断 是否登录了 且是管理员访问
+  if(to.path.indexOf("/admin") !== -1){
+    //需要登录
+    if (!store.getters['User/getIsLogin']){
+      Message.info('需要登录后在操作');
+      router.replace({
+        path: "/",
+        query:{
+          needlogin: true
+        }
+      }).catch(err => {
+
+      })
+      return false;
+    }
+    if (!store.getters['User/getUserInfo'] || store.getters['User/getUserInfo'].userOp !== 1){
+      Message.info('非管理员');
+      router.replace({
+        path: "/"
       }).catch(err => {
 
       })

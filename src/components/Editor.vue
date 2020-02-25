@@ -228,7 +228,10 @@
         }
         let file = files[0];
         this.$store.dispatch("uploadImage",file).then(res=>{
-          this.insertContent("![" + file.name + "](" + res.data + ")");
+          let name = file.name;
+          //过滤文件名包含的特殊字符
+          name = name.replace(/\(|\)|\[|\]/g,"");
+          this.insertContent("![" + name + "](" + res.data + ")");
         })
         console.log('fileUpload',file);
       },

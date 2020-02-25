@@ -50,10 +50,6 @@ axios.interceptors.response.use(function (response) {
     loading.close();
   }
   if (response.data.code === CODE_NO_LOGIN) {
-    Message({
-      message: response.data.message,
-      type: 'error'
-    });
     store.commit('User/LOGOUT');
     router.push({
       path: '/',
