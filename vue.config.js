@@ -6,6 +6,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  productionSourceMap: false,
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({

@@ -5,7 +5,8 @@
 
 服务端地址 https://github.com/blowsnowit/forum-server
 
-
+## 演示地址
+http://forum.bload.cn/
 
 ## 已实现的功能
 - 发布文章
