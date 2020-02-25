@@ -190,12 +190,14 @@
             //同时要给元素加id=
             id += level + "-" + (menus.length + 1);
             data.id = id;
+            data.label = data.index + "." + level + "." + 1;
             menus.push(data);
           }else{
             let lastMenu = this.getLastMenuByLevel(menus,level - 1);
             if (!lastMenu) continue;
             id += level + "-" + (lastMenu.children.length + 1);
             data.id = id;
+            data.label = data.index + "." + level + "." + (lastMenu.children.length + 1);
             lastMenu.children.push(data);
           }
           nums[level] = nums[level] ? nums[level] : 0;

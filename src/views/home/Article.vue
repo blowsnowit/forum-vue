@@ -67,7 +67,7 @@
             @node-click="menuTreeClick"
             ref="tree">
             <span slot-scope="{ node, data }">
-              {{data.index}}.{{data.level}} {{data.name}}
+              {{data.label}} {{data.name}}
             </span>
           </el-tree>
         </el-card>
